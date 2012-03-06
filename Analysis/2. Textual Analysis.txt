@@ -1,0 +1,48 @@
+
+========
+NOUNS
+
+Rover
+NASA
+Plateau
+Mars
+Onboard Camera
+Terrain
+Earth
+x and y position co-ordinates
+Cardinal direction Letter (NSEW)
+Compass Letter
+Command Letter
+
+========
+VERBS
+
+Landing (on the Plateau)
+Send (back to Earth)
+Control (each rover)
+Viewing (the terrain)
+Navigating (across the Plateau)
+Sending (a string of control Letters)
+Spin (90 degrees)
+Moving (forward one grid point)
+Facing (some direction)
+Input (the upper-right coordinates of the Plateau)
+Deploy (each rover - same as Landing?)
+Give (the rover’s position, as in the command line 'gives')
+Explore (the plateau)
+Finish (each rover must finish it's command sequence)
+Output (each rover's final co-ordinates and heading)
+
+=========
+POSSESSION / ADJECTIVES (candidate attributes)
+
+Rectangle (the Grid)
+Position
+Location
+Coordinates (Plateau, Rover)
+
+Position commands (to interpret)
+Movement commands
+Grid size command
+
+Heading aka Orientation (Rover's)

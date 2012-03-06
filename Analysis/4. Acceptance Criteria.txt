@@ -1,0 +1,5 @@
+1. Interprets GridSizeCommand, initializes Grid and sets size.
+
+2. Interprets RoverDeployCommand, deploys Rovers, Rovers report thier position without moving.
+
+3. Interprets RoverExploreCommand, Rovers move and turn before reporting.

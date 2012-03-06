@@ -1,0 +1,60 @@
+
+ 
+======== 
+NOUNS 
+ 
+Rover 
+NASA 
+Plateau 
+ 
+---- N/A 
+Mars, Terrain -- same as plateau 
+Onboard Camera -- not reqd in spec 
+Earth -- not reqd in spec 
+x and y position co-ordinates -- identified as attribute 
+Cardinal direction Letter (NSEW) -- identified as attribute 
+Compass Letter -- identified as attribute 
+Command Letter -- identified as attribute 
+(though these could be modeled as value classes) 
+ 
+======== 
+VERBS 
+ 
+Landing (on the Plateau) -- position command 
+Facing (some direction) -- position command 
+ 
+Spin (90 degrees) -- movement command 
+Moving (forward one grid point) -- movement command 
+ 
+Report (each rover's final co-ordinates and heading) 
+ 
+Issue Commands (to a rover) 
+ 
+Initialize (the upper-right coordinates of the Plateau) -- was 'Input' 
+ 
+---- N/A 
+Viewing (the terrain) -- not required in spec 
+Navigating (across the Plateau) -- combination of Spin and Move 
+Explore (the plateau) -- as above 
+Send (back to Earth) -- no need to send images 
+Control (each rover) -- Control, Send and Give become 'Command' 
+Give (the rover’s position, as in the command line 'gives') -- see above 
+Sending (a string of control Letters) -- and this 
+Deploy (each rover) -- combination of 'Land' and 'Face' 
+Finish (each rover must finish it's command sequence) -- this is an event but not a responsibility 
+ 
+ 
+========= 
+POSSESSION / ADJECTIVES (candidate attributes) 
+ 
+Rectangle (the Grid) 
+Position 
+Location 
+Coordinates (Plateau, Rover) 
+ 
+Position commands (to interpret) 
+Movement commands 
+Grid size command 
+ 
+Heading aka Orientation (Rover's)
+ 
