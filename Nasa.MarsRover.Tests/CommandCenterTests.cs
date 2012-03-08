@@ -57,20 +57,17 @@ namespace Nasa.MarsRover.Tests
         }
 
         [TestFixture]
-        public class CommandCenter_GetPlateauSize
+        public class CommandCenter_GetPlateau
         {
             [Test]
-            public void Returns_value_from_invocation_of_Plateau_GetPlateauSize()
+            public void Returns_value_from_invocation_of_Plateau_GetPlateau()
             {
-                var expectedSize = new GridSize();
-                var mockPlateau = new Mock<IPlateau>();
-                mockPlateau.Setup(x => x.GetSize()).Returns(expectedSize);
+                var expectedPlateau = new Mock<IPlateau>();
+                var commandCenter = new CommandCenter(expectedPlateau.Object, null, null, null);
 
-                var commandCenter = new CommandCenter(mockPlateau.Object, null, null, null);
-                var plateauSize = commandCenter.GetPlateauSize();
+                var plateau = commandCenter.GetPlateau();
 
-                mockPlateau.Verify(x => x.GetSize(), Times.Once());
-                Assert.AreEqual(expectedSize, plateauSize);
+                Assert.AreEqual(expectedPlateau, plateau);
             }
         }
 

@@ -34,9 +34,9 @@ namespace Nasa.MarsRover
             commandInvoker.InvokeAll();
         }
 
-        public GridSize GetPlateauSize()
+        public IPlateau GetPlateau()
         {
-            return plateau.GetSize();
+            return plateau;
         }
 
         public string GetCombinedRoverReport()

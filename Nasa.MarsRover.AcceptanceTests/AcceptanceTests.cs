@@ -18,12 +18,12 @@ namespace Nasa.MarsRover.AcceptanceTests
         [TestCase("2 3", 2, 3)]
         public void Given_a_commandString_with_one_grid_size_command_creates_Plateau_and_sets_size(string gridSizeCommandString, int expectedWidth, int expectedHeight)
         {
-            var expectedGridSize = new GridSize(expectedWidth, expectedHeight);
+            var expectedPlateauSize = new GridSize(expectedWidth, expectedHeight);
             var commandCenter = ObjectFactory.GetInstance<ICommandCenter>();
             commandCenter.Execute(gridSizeCommandString);
-            var gridSize = commandCenter.GetPlateauSize();
-            Assert.AreEqual(expectedGridSize.Width, gridSize.Width);
-            Assert.AreEqual(expectedGridSize.Height, gridSize.Height);
+            var plateau = commandCenter.GetPlateau();
+            var plateauSize = plateau.GetSize();
+            Assert.AreEqual(expectedPlateauSize, plateauSize);
         }
 
         [TestCase("1 2 N")]
