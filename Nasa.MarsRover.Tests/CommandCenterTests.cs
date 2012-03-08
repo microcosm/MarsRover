@@ -12,6 +12,31 @@ namespace Nasa.MarsRover.Tests
     public class CommandCenterTests
     {
         [TestFixture]
+        public class CommandCenter_Constructor
+        {
+            [Test]
+            public void Assigns_Plateau_to_CommandInvoker_for_use_in_commands()
+            {
+                var mockPlateau = new Mock<IPlateau>();
+                var mockCommandInvoker = new Mock<ICommandInvoker>();
+
+                var commandCenter = new CommandCenter(mockPlateau.Object, null, mockCommandInvoker.Object, null);
+                
+                mockCommandInvoker.Verify(x => x.SetPlateau(mockPlateau.Object), Times.Once());
+            }
+
+            [Test]
+            public void Assigns_a_rover_list_to_CommandInvoker_for_use_in_commands()
+            {
+                var mockCommandInvoker = new Mock<ICommandInvoker>();
+
+                var commandCenter = new CommandCenter(null, null, mockCommandInvoker.Object, null);
+                
+                mockCommandInvoker.Verify(x => x.SetRovers(It.IsAny<IList<IRover>>()), Times.Once());
+            }
+        }
+
+        [TestFixture]
         public class CommandCenter_Interpret
         {
             [Test]
@@ -28,31 +53,6 @@ namespace Nasa.MarsRover.Tests
 
                 mockCommandInvoker.Verify(x => x.Assign(expectedInvocationList), Times.Once());
                 mockCommandInvoker.Verify(x => x.InvokeAll(), Times.Once());
-            }
-
-            [Test]
-            public void Assigns_Plateau_to_CommandInvoker_for_use_in_commands()
-            {
-                var mockPlateau = new Mock<IPlateau>();
-                var mockCommandParser = new Mock<ICommandParser>();
-                var mockCommandInvoker = new Mock<ICommandInvoker>();
-
-                var commandCenter = new CommandCenter(mockPlateau.Object, mockCommandParser.Object, mockCommandInvoker.Object, null);
-                commandCenter.Execute(null);
-
-                mockCommandInvoker.Verify(x => x.SetPlateau(mockPlateau.Object), Times.Once());
-            }
-
-            [Test]
-            public void Assigns_a_rover_list_to_CommandInvoker_for_use_in_commands()
-            {
-                var mockCommandParser = new Mock<ICommandParser>();
-                var mockCommandInvoker = new Mock<ICommandInvoker>();
-
-                var commandCenter = new CommandCenter(null, mockCommandParser.Object, mockCommandInvoker.Object, null);
-                commandCenter.Execute(null);
-
-                mockCommandInvoker.Verify(x => x.SetRovers(It.IsAny<IList<IRover>>()), Times.Once());   
             }
         }
 
@@ -79,10 +79,11 @@ namespace Nasa.MarsRover.Tests
             {
                 const string expectedReport = "any";
                 var mockReportComposer = new Mock<IReportComposer>();
+                var mockCommandInvoker = new Mock<ICommandInvoker>();
                 mockReportComposer.Setup(x => x.CompileReports(It.IsAny<List<IRover>>()))
                     .Returns(expectedReport);
 
-                var commandCenter = new CommandCenter(null, null, null, mockReportComposer.Object);
+                var commandCenter = new CommandCenter(null, null, mockCommandInvoker.Object, mockReportComposer.Object);
                 var report = commandCenter.GetCombinedRoverReport();
                 Assert.AreEqual(expectedReport, report);
             }

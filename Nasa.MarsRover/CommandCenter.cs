@@ -18,19 +18,19 @@ namespace Nasa.MarsRover
 
         public CommandCenter(IPlateau aPlateau, ICommandParser aCommandParser, ICommandInvoker aCommandInvoker, IReportComposer aReportComposer)
         {
+            rovers = new List<IRover>();
             plateau = aPlateau;
             commandParser = aCommandParser;
             commandInvoker = aCommandInvoker;
             reportComposer = aReportComposer;
-            rovers = new List<IRover>();
+            commandInvoker.SetPlateau(plateau);
+            commandInvoker.SetRovers(rovers);
         }
 
         public void Execute(string commandString)
         {
             var commandList = commandParser.Parse(commandString);
             commandInvoker.Assign(commandList);
-            commandInvoker.SetPlateau(plateau);
-            commandInvoker.SetRovers(rovers);
             commandInvoker.InvokeAll();
         }
 
