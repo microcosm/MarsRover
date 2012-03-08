@@ -13,15 +13,14 @@ namespace Nasa.MarsRover.Tests.Plateau
             [TestCase(4, 5)]
             public void When_size_has_been_set_should_return_size_with_same_values(int expectedWidth, int expectedHeight)
             {
-                var size = new GridSize(expectedWidth, expectedHeight);
+                var expectedSize = new GridSize(expectedWidth, expectedHeight);
                 
                 var grid = new GridPlateau();
-                grid.SetSize(size);
+                grid.SetSize(expectedSize);
 
                 var gridSize = grid.GetSize();
 
-                Assert.AreEqual(expectedWidth, gridSize.Width);
-                Assert.AreEqual(expectedHeight, gridSize.Height);
+                Assert.AreEqual(expectedSize, gridSize);
             }
         }
 
