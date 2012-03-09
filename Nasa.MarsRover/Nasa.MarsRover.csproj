@@ -77,7 +77,7 @@
     <Compile Include="Command\Interpret\ICommandParser.cs" />
     <Compile Include="Command\IGridSizeCommand.cs" />
     <Compile Include="LandingSurface\Plateau.cs" />
-    <Compile Include="LandingSurface\GridSize.cs" />
+    <Compile Include="LandingSurface\Size.cs" />
     <Compile Include="LandingSurface\ILandingSurface.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

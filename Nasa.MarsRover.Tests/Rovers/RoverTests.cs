@@ -56,7 +56,7 @@ namespace Nasa.MarsRover.Tests.Rovers
             public void When_given_invalid_deploy_point_should_throw_RoverDeployException()
             {
                 var aPoint = new Point(0, 0);
-                var aSize = new GridSize(0, 0);
+                var aSize = new Size(0, 0);
                 
                 mockLandingSurface.Setup(x => x.IsValid(aPoint)).Returns(false);
                 mockLandingSurface.Setup(x => x.GetSize()).Returns(aSize);

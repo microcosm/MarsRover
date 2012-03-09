@@ -4,7 +4,7 @@ namespace Nasa.MarsRover.Command
 {
     public interface IGridSizeCommand : ICommand
     {
-        GridSize Size { get; }
+        Size Size { get; }
         void SetReceiver(ILandingSurface aLandingSurface);
     }
 }

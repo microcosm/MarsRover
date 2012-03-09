@@ -13,7 +13,7 @@ namespace Nasa.MarsRover.Tests.Command
             [Test]
             public void Given_a_size_argument_exposes_as_public_property()
             {
-                var size = new GridSize(1, 2);
+                var size = new Size(1, 2);
                 var gridSizeCommand = new GridSizeCommand(size);
                 Assert.AreEqual(size, gridSizeCommand.Size);
             }
@@ -25,9 +25,9 @@ namespace Nasa.MarsRover.Tests.Command
             [Test]
             public void Should_accept_Receiver_argument()
             {
-                var anyGridSize = new GridSize(0, 0);
+                var anySize = new Size(0, 0);
                 var mockLandingSurface = new Mock<ILandingSurface>();
-                var gridSizeCommand = new GridSizeCommand(anyGridSize);
+                var gridSizeCommand = new GridSizeCommand(anySize);
                 Assert.DoesNotThrow(() =>
                     gridSizeCommand.SetReceiver(mockLandingSurface.Object));
             }
@@ -40,7 +40,7 @@ namespace Nasa.MarsRover.Tests.Command
             public void Should_set_LandingSurface_size()
             {
                 var mockLandingSurface = new Mock<ILandingSurface>();
-                var anySize = new GridSize(0, 0);
+                var anySize = new Size(0, 0);
                 var gridSizeCommand = new GridSizeCommand(anySize);
                 gridSizeCommand.SetReceiver(mockLandingSurface.Object);
 
@@ -56,7 +56,7 @@ namespace Nasa.MarsRover.Tests.Command
             [Test]
             public void Should_return_GridSizeCommand_type()
             {
-                var size = new GridSize(0, 0);
+                var size = new Size(0, 0);
                 var gridSizeCommand = new GridSizeCommand(size);
                 Assert.AreEqual(gridSizeCommand.GetCommandType(), CommandType.GridSizeCommand);
             }

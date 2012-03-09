@@ -12,14 +12,13 @@ namespace Nasa.MarsRover.Tests.LandingSurface
             [TestCase(4, 5)]
             public void When_size_has_been_set_should_return_size_with_same_values(int expectedWidth, int expectedHeight)
             {
-                var expectedSize = new GridSize(expectedWidth, expectedHeight);
-                
-                var grid = new Plateau();
-                grid.SetSize(expectedSize);
+                var expectedSize = new Size(expectedWidth, expectedHeight);
+                var plateau = new Plateau();
 
-                var gridSize = grid.GetSize();
+                plateau.SetSize(expectedSize);
+                var actualSize = plateau.GetSize();
 
-                Assert.AreEqual(expectedSize, gridSize);
+                Assert.AreEqual(expectedSize, actualSize);
             }
         }
 
@@ -29,16 +28,16 @@ namespace Nasa.MarsRover.Tests.LandingSurface
             [TestCase(1, 1, 0, 0)]
             [TestCase(1, 1, 1, 1)]
             [TestCase(5, 3, 5, 3)]
-            public void When_point_is_within_PlateauSize_boundary_should_return_true(int boundaryX, int boundaryY, int attemptedPointX, int attemptedPointY)
+            public void When_point_is_within_size_boundary_should_return_true(int boundaryX, int boundaryY, int attemptedPointX, int attemptedPointY)
             {
-                var size = new GridSize(boundaryX, boundaryY);
+                var size = new Size(boundaryX, boundaryY);
                 var point = new Point(attemptedPointX, attemptedPointY);
+                var plateau = new Plateau();
 
-                var grid = new Plateau();
-                grid.SetSize(size);
+                plateau.SetSize(size);
 
-                var isValid = grid.IsValid(point);
-                Assert.That(isValid);
+                var isValidPoint = plateau.IsValid(point);
+                Assert.That(isValidPoint);
             }
 
             [TestCase(1, 1, 2, 0)]
@@ -46,16 +45,16 @@ namespace Nasa.MarsRover.Tests.LandingSurface
             [TestCase(1, 1, -1, 1)]
             [TestCase(1, 1, 1, -1)]
             [TestCase(5, 3, 3, 5)]
-            public void When_point_is_outside_PlateauSize_boundary_should_return_false(int boundaryX, int boundaryY, int attemptedX, int attemptedY)
+            public void When_point_is_outside_size_boundary_should_return_false(int boundaryX, int boundaryY, int attemptedX, int attemptedY)
             {
-                var size = new GridSize(boundaryX, boundaryY);
+                var size = new Size(boundaryX, boundaryY);
                 var point = new Point(attemptedX, attemptedY);
-
                 var grid = new Plateau();
+                
                 grid.SetSize(size);
 
-                var isValid = grid.IsValid(point);
-                Assert.That(!isValid);
+                var isValidPoint = grid.IsValid(point);
+                Assert.That(!isValidPoint);
             }
         }
     }

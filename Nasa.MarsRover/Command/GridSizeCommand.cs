@@ -4,10 +4,10 @@ namespace Nasa.MarsRover.Command
 {
     public class GridSizeCommand : IGridSizeCommand
     {
-        public GridSize Size { get; private set; }
+        public Size Size { get; private set; }
         private ILandingSurface landingSurface;
 
-        public GridSizeCommand(GridSize aSize)
+        public GridSizeCommand(Size aSize)
         {
             Size = aSize;
         }

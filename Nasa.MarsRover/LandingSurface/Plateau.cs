@@ -2,22 +2,22 @@
 {
     public class Plateau : ILandingSurface
     {
-        private GridSize gridSize { get; set; }
+        private Size size { get; set; }
 
-        public void SetSize(GridSize plateauSize)
+        public void SetSize(Size aSize)
         {
-            gridSize = plateauSize;
+            size = aSize;
         }
 
-        public GridSize GetSize()
+        public Size GetSize()
         {
-            return gridSize;
+            return size;
         }
 
         public bool IsValid(Point aPoint)
         {
-            var isValidX = aPoint.X >= 0 && aPoint.X <= gridSize.Width;
-            var isValidY = aPoint.Y >= 0 && aPoint.Y <= gridSize.Height;
+            var isValidX = aPoint.X >= 0 && aPoint.X <= size.Width;
+            var isValidY = aPoint.Y >= 0 && aPoint.Y <= size.Height;
             return isValidX && isValidY;
         }
     }

@@ -7,7 +7,7 @@ namespace Nasa.MarsRover.Command
     {
         public IGridSizeCommand CreateGridSizeCommand(int aWidth, int aHeight)
         {
-            var size = new GridSize(aWidth, aHeight);
+            var size = new Size(aWidth, aHeight);
 
             return ObjectFactory
                 .With("aSize").EqualTo(size)

@@ -29,9 +29,9 @@ namespace Nasa.MarsRover.Rovers
 
         private static void throwDeployException(ILandingSurface aLandingSurface, Point aPoint)
         {
-            var plateauSize = aLandingSurface.GetSize();
+            var size = aLandingSurface.GetSize();
             var exceptionMessage = String.Format("Deploy failed for point ({0},{1}). Landing surface size is {2} x {3}.",
-                aPoint.X, aPoint.Y, plateauSize.Width, plateauSize.Height);
+                aPoint.X, aPoint.Y, size.Width, size.Height);
             throw new RoverDeployException(exceptionMessage);
         }
     }

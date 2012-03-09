@@ -16,9 +16,9 @@ namespace Nasa.MarsRover.AcceptanceTests
 
         [TestCase("5 5", 5, 5)]
         [TestCase("2 3", 2, 3)]
-        public void Given_a_commandString_with_one_grid_size_command_creates_LandingSurface_and_sets_size(string gridSizeCommandString, int expectedWidth, int expectedHeight)
+        public void Given_a_commandString_with_one_GridSizeCommand_creates_LandingSurface_and_sets_size(string gridSizeCommandString, int expectedWidth, int expectedHeight)
         {
-            var expectedSize = new GridSize(expectedWidth, expectedHeight);
+            var expectedSize = new Size(expectedWidth, expectedHeight);
             var commandCenter = ObjectFactory.GetInstance<ICommandCenter>();
             commandCenter.Execute(gridSizeCommandString);
             var landingSurface = commandCenter.GetLandingSurface();
@@ -30,7 +30,7 @@ namespace Nasa.MarsRover.AcceptanceTests
         [TestCase("3 4 S")]
         [TestCase("5 6 E")]
         [TestCase("1 2 W")]
-        public void Given_a_commandString_with_one_rover_deploy_command_rovers_deploy_and_report_without_moving(string roverDeployCommand)
+        public void Given_a_commandString_with_one_RoverDeployCommand_rovers_deploy_and_report_without_moving(string roverDeployCommand)
         {
             var commandString = prependGridSizeCommand(roverDeployCommand);
             var commandCenter = ObjectFactory.GetInstance<ICommandCenter>();

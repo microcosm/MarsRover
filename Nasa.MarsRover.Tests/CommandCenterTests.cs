@@ -42,7 +42,7 @@ namespace Nasa.MarsRover.Tests
             [Test]
             public void Assigns_command_list_from_CommandParser_to_CommandInvoker_and_Invokes()
             {
-                var expectedInvocationList = new ICommand[] { new GridSizeCommand(new GridSize(1, 2)) };
+                var expectedInvocationList = new ICommand[] { new GridSizeCommand(new Size(1, 2)) };
                 var mockCommandParser = new Mock<ICommandParser>();
                 mockCommandParser.Setup(x => x.Parse(null)).Returns(expectedInvocationList);
 
