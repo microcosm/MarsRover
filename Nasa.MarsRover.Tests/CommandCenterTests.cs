@@ -63,11 +63,12 @@ namespace Nasa.MarsRover.Tests
             public void Returns_injected_LandingSurface()
             {
                 var expectedLandingSurface = new Mock<ILandingSurface>();
-                var commandCenter = new CommandCenter(expectedLandingSurface.Object, null, null, null);
+                var mockCommandinvoker = new Mock<ICommandInvoker>();
+                var commandCenter = new CommandCenter(expectedLandingSurface.Object, null, mockCommandinvoker.Object, null);
 
                 var landingSurface = commandCenter.GetLandingSurface();
 
-                Assert.AreEqual(expectedLandingSurface, landingSurface);
+                Assert.AreEqual(expectedLandingSurface.Object, landingSurface);
             }
         }
 
