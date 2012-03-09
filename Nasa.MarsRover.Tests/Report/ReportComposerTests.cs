@@ -18,7 +18,7 @@ namespace Nasa.MarsRover.Tests.Report
             [TestCase(7, 8, CardinalDirection.West, "7 8 W")]
             public void Should_compose_arguments_into_expected_report_format(int coordinateX, int coordinateY, CardinalDirection cardinalDirection, string expectedReport)
             {
-                var point = new GridPoint(coordinateX, coordinateY);
+                var point = new Point(coordinateX, coordinateY);
 
                 var reportComposer = new ReportComposer();
                 var report = reportComposer.Compose(point, cardinalDirection);

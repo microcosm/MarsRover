@@ -5,8 +5,8 @@ namespace Nasa.MarsRover.Command
 {
     public interface IRoverDeployCommand : ICommand
     {
-        GridPoint PlateauPoint { get; set; }
-        CardinalDirection CardinalDirection { get; set; }
+        Point DeployPoint { get; set; }
+        CardinalDirection DeployDirection { get; set; }
         void SetReceivers(IRover aRover, ILandingSurface aLandingSurface);
     }
 }

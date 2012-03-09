@@ -32,7 +32,7 @@ namespace Nasa.MarsRover.Tests.LandingSurface
             public void When_point_is_within_PlateauSize_boundary_should_return_true(int boundaryX, int boundaryY, int attemptedPointX, int attemptedPointY)
             {
                 var size = new GridSize(boundaryX, boundaryY);
-                var point = new GridPoint(attemptedPointX, attemptedPointY);
+                var point = new Point(attemptedPointX, attemptedPointY);
 
                 var grid = new Plateau();
                 grid.SetSize(size);
@@ -49,7 +49,7 @@ namespace Nasa.MarsRover.Tests.LandingSurface
             public void When_point_is_outside_PlateauSize_boundary_should_return_false(int boundaryX, int boundaryY, int attemptedX, int attemptedY)
             {
                 var size = new GridSize(boundaryX, boundaryY);
-                var point = new GridPoint(attemptedX, attemptedY);
+                var point = new Point(attemptedX, attemptedY);
 
                 var grid = new Plateau();
                 grid.SetSize(size);

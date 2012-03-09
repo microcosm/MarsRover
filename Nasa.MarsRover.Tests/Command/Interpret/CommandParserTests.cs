@@ -43,7 +43,7 @@ namespace Nasa.MarsRover.Tests.Command.Interpret
             [TestCase("4 5 W", 4, 5, CardinalDirection.West)]
             public void When_Command_is_RoverDeployCommand_invokes_CommandFactory_CreateRoverDeployCommand_with_parsed_values(string roverDeployCommand, int expectedX, int expectedY, CardinalDirection expectedCardinalDirection)
             {
-                var expectedPoint = new GridPoint(expectedX, expectedY);
+                var expectedPoint = new Point(expectedX, expectedY);
 
                 mockCommandMatcher.Setup(x => x.GetCommandType(roverDeployCommand))
                     .Returns(CommandType.RoverDeployCommand);
@@ -79,7 +79,7 @@ namespace Nasa.MarsRover.Tests.Command.Interpret
                     .Returns(CommandType.RoverDeployCommand);
                 var mockRoverDeployCommand = new Mock<IRoverDeployCommand>();
 
-                mockCommandFactory.Setup(x => x.CreateRoverDeployCommand(It.IsAny<GridPoint>(), It.IsAny<CardinalDirection>()))
+                mockCommandFactory.Setup(x => x.CreateRoverDeployCommand(It.IsAny<Point>(), It.IsAny<CardinalDirection>()))
                     .Returns(mockRoverDeployCommand.Object);
 
                 var commands = commandParser.Parse(roverDeployCommand);

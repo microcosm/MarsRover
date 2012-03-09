@@ -4,6 +4,6 @@ namespace Nasa.MarsRover.LandingSurface
     {
         void SetSize(GridSize plateauSize);
         GridSize GetSize();
-        bool IsValid(GridPoint plateauPoint);
+        bool IsValid(Point aPoint);
     }
 }

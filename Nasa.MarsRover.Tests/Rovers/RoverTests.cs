@@ -32,7 +32,7 @@ namespace Nasa.MarsRover.Tests.Rovers
             [TestCase(3, 4, CardinalDirection.South)]
             public void When_given_valid_deploy_point_and_direction_should_expose_as_properties(int expectedX, int expectedY, CardinalDirection expectedCardinalDirection)
             {
-                var expectedPoint = new GridPoint(expectedX, expectedY);
+                var expectedPoint = new Point(expectedX, expectedY);
                 mockLandingSurface.Setup(x => x.IsValid(expectedPoint)).Returns(true);
 
                 var rover = new Rover();
@@ -45,7 +45,7 @@ namespace Nasa.MarsRover.Tests.Rovers
             [Test]
             public void Should_invoke_LandingSurface_IsValid()
             {
-                var aPoint = new GridPoint(0, 0);
+                var aPoint = new Point(0, 0);
                 mockLandingSurface.Setup(x => x.IsValid(aPoint)).Returns(true);
                 var rover = new Rover();
                 rover.Deploy(mockLandingSurface.Object, aPoint, CardinalDirection.South);
@@ -55,7 +55,7 @@ namespace Nasa.MarsRover.Tests.Rovers
             [Test]
             public void When_given_invalid_deploy_point_should_throw_RoverDeployException()
             {
-                var aPoint = new GridPoint(0, 0);
+                var aPoint = new Point(0, 0);
                 var aSize = new GridSize(0, 0);
                 
                 mockLandingSurface.Setup(x => x.IsValid(aPoint)).Returns(false);
@@ -81,7 +81,7 @@ namespace Nasa.MarsRover.Tests.Rovers
             [Test]
             public void After_Rover_has_been_deployed_returns_true()
             {
-                var point = new GridPoint(0, 0);
+                var point = new Point(0, 0);
                 mockLandingSurface.Setup(x => x.IsValid(point)).Returns(true);
                 var rover = new Rover();
                 rover.Deploy(mockLandingSurface.Object, point, CardinalDirection.North);
@@ -94,7 +94,7 @@ namespace Nasa.MarsRover.Tests.Rovers
             [Test]
             public void Before_Rover_has_been_deployed_returns_false()
             {
-                var point = new GridPoint(0, 0);
+                var point = new Point(0, 0);
                 mockLandingSurface.Setup(x => x.IsValid(point)).Returns(true);
                 var rover = new Rover();
 

@@ -14,10 +14,10 @@
             return gridSize;
         }
 
-        public bool IsValid(GridPoint plateauPoint)
+        public bool IsValid(Point aPoint)
         {
-            var isValidX = plateauPoint.X >= 0 && plateauPoint.X <= gridSize.Width;
-            var isValidY = plateauPoint.Y >= 0 && plateauPoint.Y <= gridSize.Height;
+            var isValidX = aPoint.X >= 0 && aPoint.X <= gridSize.Width;
+            var isValidY = aPoint.Y >= 0 && aPoint.Y <= gridSize.Height;
             return isValidX && isValidY;
         }
     }

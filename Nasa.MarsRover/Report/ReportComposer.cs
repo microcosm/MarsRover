@@ -22,10 +22,10 @@ namespace Nasa.MarsRover.Report
             };
         }
 
-        public string Compose(GridPoint aPlateauPoint, CardinalDirection aCardinalDirection)
+        public string Compose(Point aPoint, CardinalDirection aCardinalDirection)
         {
-            var reportItem1 = aPlateauPoint.X;
-            var reportItem2 = aPlateauPoint.Y;
+            var reportItem1 = aPoint.X;
+            var reportItem2 = aPoint.Y;
             var reportItem3 = cardinalDirectionDictionary[aCardinalDirection];
             var report = new StringBuilder();
             report.AppendFormat("{0} {1} {2}", reportItem1, reportItem2, reportItem3);

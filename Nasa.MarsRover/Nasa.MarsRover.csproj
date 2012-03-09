@@ -69,7 +69,7 @@
     <Compile Include="Command\CommandFactory.cs" />
     <Compile Include="Command\Interpret\CommandMatcher.cs" />
     <Compile Include="Command\Interpret\ICommandMatcher.cs" />
-    <Compile Include="LandingSurface\GridPoint.cs" />
+    <Compile Include="LandingSurface\Point.cs" />
     <Compile Include="Command\Interpret\CommandParser.cs" />
     <Compile Include="Command\Interpret\CommandException.cs" />
     <Compile Include="Command\GridSizeCommand.cs" />

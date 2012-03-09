@@ -55,12 +55,12 @@ namespace Nasa.MarsRover.Command.Interpret
             var deployX = int.Parse(arguments[0]);
             var deployY = int.Parse(arguments[1]);
 
-            var cardinalDirectionSignifier = arguments[2][0];
-            var cardinalDirection = cardinalDirectionDictionary[cardinalDirectionSignifier];
+            var directionSignifier = arguments[2][0];
+            var deployDirection = cardinalDirectionDictionary[directionSignifier];
 
-            var plateauPoint = new GridPoint(deployX, deployY);
+            var deployPoint = new Point(deployX, deployY);
 
-            var populatedCommand = commandFactory.CreateRoverDeployCommand(plateauPoint, cardinalDirection);
+            var populatedCommand = commandFactory.CreateRoverDeployCommand(deployPoint, deployDirection);
             return populatedCommand;
         }
     }

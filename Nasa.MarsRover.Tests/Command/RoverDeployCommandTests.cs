@@ -15,12 +15,12 @@ namespace Nasa.MarsRover.Tests.Command
             [TestCase(2, 3, CardinalDirection.West)]
             public void Given_size_and_direction_exposes_as_public_properties(int expectedX, int expectedY, CardinalDirection expectedDirection)
             {
-                var expectedPoint = new GridPoint(expectedX, expectedY);
+                var expectedPoint = new Point(expectedX, expectedY);
 
                 var roverDeployCommand = new RoverDeployCommand(expectedPoint, expectedDirection);
 
-                Assert.AreEqual(expectedPoint, roverDeployCommand.PlateauPoint);
-                Assert.AreEqual(expectedDirection, roverDeployCommand.CardinalDirection);
+                Assert.AreEqual(expectedPoint, roverDeployCommand.DeployPoint);
+                Assert.AreEqual(expectedDirection, roverDeployCommand.DeployDirection);
             }
         }
 
@@ -31,10 +31,10 @@ namespace Nasa.MarsRover.Tests.Command
             public void Should_accept_Receiver_arguments()
             {
                 const CardinalDirection anyCardinalDirection = CardinalDirection.South;
-                var anyGridPoint = new GridPoint(0, 0);
+                var anyPoint = new Point(0, 0);
                 var mockRover = new Mock<IRover>();
                 var mockLandingSurface = new Mock<ILandingSurface>();
-                var gridSizeCommand = new RoverDeployCommand(anyGridPoint, anyCardinalDirection);
+                var gridSizeCommand = new RoverDeployCommand(anyPoint, anyCardinalDirection);
                 Assert.DoesNotThrow(() =>
                     gridSizeCommand.SetReceivers(mockRover.Object, mockLandingSurface.Object));
             }
@@ -47,7 +47,7 @@ namespace Nasa.MarsRover.Tests.Command
             public void Should_invoke_Rover_Deploy()
             {
                 const CardinalDirection expectedCardinalDirection = CardinalDirection.North;
-                var expectedPoint = new GridPoint(0, 0);
+                var expectedPoint = new Point(0, 0);
 
                 var mockRover = new Mock<IRover>();
                 var mockLandingSurface = new Mock<ILandingSurface>();
@@ -67,7 +67,7 @@ namespace Nasa.MarsRover.Tests.Command
             [Test]
             public void Should_return_RoverDeployCommand_type()
             {
-                var point = new GridPoint(0, 0);
+                var point = new Point(0, 0);
                 var roverDeployCommand = new RoverDeployCommand(point, CardinalDirection.West);
                 Assert.AreEqual(roverDeployCommand.GetCommandType(), CommandType.RoverDeployCommand);
             }

@@ -4,9 +4,9 @@ namespace Nasa.MarsRover.Rovers
 {
     public interface IRover
     {
-        GridPoint Position { get; set; }
+        Point Position { get; set; }
         CardinalDirection CardinalDirection { get; set; }
-        void Deploy(ILandingSurface aLandingSurface, GridPoint aPlateauPoint, CardinalDirection aCardinalDirection);
+        void Deploy(ILandingSurface aLandingSurface, Point aPoint, CardinalDirection aDirection);
         bool IsDeployed();
     }
 }

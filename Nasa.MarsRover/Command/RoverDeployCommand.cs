@@ -5,15 +5,15 @@ namespace Nasa.MarsRover.Command
 {
     public class RoverDeployCommand : IRoverDeployCommand
     {
-        public GridPoint PlateauPoint { get; set; }
-        public CardinalDirection CardinalDirection { get; set; }
+        public Point DeployPoint { get; set; }
+        public CardinalDirection DeployDirection { get; set; }
         private IRover rover;
         private ILandingSurface landingSurface;
 
-        public RoverDeployCommand(GridPoint aPlateauPoint, CardinalDirection aCardinalDirection)
+        public RoverDeployCommand(Point aPoint, CardinalDirection aDirection)
         {
-            PlateauPoint = aPlateauPoint;
-            CardinalDirection = aCardinalDirection;
+            DeployPoint = aPoint;
+            DeployDirection = aDirection;
         }
 
         public CommandType GetCommandType()
@@ -23,7 +23,7 @@ namespace Nasa.MarsRover.Command
 
         public void Execute()
         {
-            rover.Deploy(landingSurface, PlateauPoint, CardinalDirection);
+            rover.Deploy(landingSurface, DeployPoint, DeployDirection);
         }
 
         public void SetReceivers(IRover aRover, ILandingSurface aLandingSurface)

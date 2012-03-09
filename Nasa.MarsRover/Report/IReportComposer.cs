@@ -6,7 +6,7 @@ namespace Nasa.MarsRover.Report
 {
     public interface IReportComposer
     {
-        string Compose(GridPoint aPlateauPoint, CardinalDirection aCardinalDirection);
+        string Compose(Point aPoint, CardinalDirection aCardinalDirection);
         string CompileReports(IEnumerable<IRover> rovers);
     }
 }

@@ -14,11 +14,11 @@ namespace Nasa.MarsRover.Command
                 .GetInstance<IGridSizeCommand>();
         }
 
-        public IRoverDeployCommand CreateRoverDeployCommand(GridPoint plateauPoint, CardinalDirection cardinalDirection)
+        public IRoverDeployCommand CreateRoverDeployCommand(Point aPoint, CardinalDirection aDirection)
         {
             return ObjectFactory
-                .With("aPlateauPoint").EqualTo(plateauPoint)
-                .With("aCardinalDirection").EqualTo(cardinalDirection)
+                .With("aPoint").EqualTo(aPoint)
+                .With("aDirection").EqualTo(aDirection)
                 .GetInstance<IRoverDeployCommand>();
         }
     }
