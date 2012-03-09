@@ -49,11 +49,11 @@ namespace Nasa.MarsRover.Tests.LandingSurface
             {
                 var size = new Size(boundaryX, boundaryY);
                 var point = new Point(attemptedX, attemptedY);
-                var grid = new Plateau();
+                var plateau = new Plateau();
                 
-                grid.SetSize(size);
+                plateau.SetSize(size);
 
-                var isValidPoint = grid.IsValid(point);
+                var isValidPoint = plateau.IsValid(point);
                 Assert.That(!isValidPoint);
             }
         }
