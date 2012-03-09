@@ -1,6 +1,6 @@
-namespace Nasa.MarsRover.Plateau
+namespace Nasa.MarsRover.LandingSurface
 {
-    public interface IPlateau
+    public interface ILandingSurface
     {
         void SetSize(GridSize plateauSize);
         GridSize GetSize();

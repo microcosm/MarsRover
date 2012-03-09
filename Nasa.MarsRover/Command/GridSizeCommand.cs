@@ -1,11 +1,11 @@
-﻿using Nasa.MarsRover.Plateau;
+﻿using Nasa.MarsRover.LandingSurface;
 
 namespace Nasa.MarsRover.Command
 {
     public class GridSizeCommand : IGridSizeCommand
     {
         public GridSize Size { get; private set; }
-        private IPlateau plateau;
+        private ILandingSurface landingSurface;
 
         public GridSizeCommand(GridSize aSize)
         {
@@ -19,12 +19,12 @@ namespace Nasa.MarsRover.Command
 
         public void Execute()
         {
-            plateau.SetSize(Size);
+            landingSurface.SetSize(Size);
         }
 
-        public void SetReceiver(IPlateau aPlateau)
+        public void SetReceiver(ILandingSurface aLandingSurface)
         {
-            plateau = aPlateau;
+            landingSurface = aLandingSurface;
         }
     }
 }

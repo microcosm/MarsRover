@@ -1,4 +1,4 @@
-using Nasa.MarsRover.Plateau;
+using Nasa.MarsRover.LandingSurface;
 
 namespace Nasa.MarsRover.Command
 {

@@ -1,4 +1,4 @@
-﻿using Nasa.MarsRover.Plateau;
+﻿using Nasa.MarsRover.LandingSurface;
 using Nasa.MarsRover.Rovers;
 
 namespace Nasa.MarsRover.Command
@@ -8,7 +8,7 @@ namespace Nasa.MarsRover.Command
         public GridPoint PlateauPoint { get; set; }
         public CardinalDirection CardinalDirection { get; set; }
         private IRover rover;
-        private IPlateau plateau;
+        private ILandingSurface landingSurface;
 
         public RoverDeployCommand(GridPoint aPlateauPoint, CardinalDirection aCardinalDirection)
         {
@@ -23,13 +23,13 @@ namespace Nasa.MarsRover.Command
 
         public void Execute()
         {
-            rover.Deploy(plateau, PlateauPoint, CardinalDirection);
+            rover.Deploy(landingSurface, PlateauPoint, CardinalDirection);
         }
 
-        public void SetReceivers(IRover aRover, IPlateau aPlateau)
+        public void SetReceivers(IRover aRover, ILandingSurface aLandingSurface)
         {
             rover = aRover;
-            plateau = aPlateau;
+            landingSurface = aLandingSurface;
         }
     }
 }

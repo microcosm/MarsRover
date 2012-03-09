@@ -1,7 +1,7 @@
 ﻿using Moq;
 using NUnit.Framework;
 using Nasa.MarsRover.Command;
-using Nasa.MarsRover.Plateau;
+using Nasa.MarsRover.LandingSurface;
 
 namespace Nasa.MarsRover.Tests.Command
 {
@@ -26,10 +26,10 @@ namespace Nasa.MarsRover.Tests.Command
             public void Should_accept_Receiver_argument()
             {
                 var anyGridSize = new GridSize(0, 0);
-                var mockPlateau = new Mock<IPlateau>();
+                var mockLandingSurface = new Mock<ILandingSurface>();
                 var gridSizeCommand = new GridSizeCommand(anyGridSize);
                 Assert.DoesNotThrow(() =>
-                    gridSizeCommand.SetReceiver(mockPlateau.Object));
+                    gridSizeCommand.SetReceiver(mockLandingSurface.Object));
             }
         }
 
@@ -37,16 +37,16 @@ namespace Nasa.MarsRover.Tests.Command
         public class GridSizeCommand_Execute
         {
             [Test]
-            public void Should_set_Plateau_size()
+            public void Should_set_LandingSurface_size()
             {
-                var mockPlateau = new Mock<IPlateau>();
+                var mockLandingSurface = new Mock<ILandingSurface>();
                 var anySize = new GridSize(0, 0);
                 var gridSizeCommand = new GridSizeCommand(anySize);
-                gridSizeCommand.SetReceiver(mockPlateau.Object);
+                gridSizeCommand.SetReceiver(mockLandingSurface.Object);
 
                 gridSizeCommand.Execute();
 
-                mockPlateau.Verify(x => x.SetSize(anySize), Times.Once());
+                mockLandingSurface.Verify(x => x.SetSize(anySize), Times.Once());
             }
         }
 

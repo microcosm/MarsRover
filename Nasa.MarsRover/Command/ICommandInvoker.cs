@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using Nasa.MarsRover.Plateau;
+using Nasa.MarsRover.LandingSurface;
 using Nasa.MarsRover.Rovers;
 
 namespace Nasa.MarsRover.Command
 {
     public interface ICommandInvoker
     {
-        void SetPlateau(IPlateau aPlateau);
+        void SetLandingSurface(ILandingSurface aLandingSurface);
         void SetRovers(IList<IRover> someRovers);
         void Assign(IEnumerable<ICommand> aCommandList);
         void InvokeAll();

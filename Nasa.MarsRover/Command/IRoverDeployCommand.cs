@@ -1,4 +1,4 @@
-using Nasa.MarsRover.Plateau;
+using Nasa.MarsRover.LandingSurface;
 using Nasa.MarsRover.Rovers;
 
 namespace Nasa.MarsRover.Command
@@ -7,6 +7,6 @@ namespace Nasa.MarsRover.Command
     {
         GridPoint PlateauPoint { get; set; }
         CardinalDirection CardinalDirection { get; set; }
-        void SetReceivers(IRover aRover, IPlateau aPlateau);
+        void SetReceivers(IRover aRover, ILandingSurface aLandingSurface);
     }
 }

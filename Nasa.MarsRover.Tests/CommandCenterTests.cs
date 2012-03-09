@@ -3,7 +3,7 @@ using Moq;
 using NUnit.Framework;
 using Nasa.MarsRover.Command;
 using Nasa.MarsRover.Command.Interpret;
-using Nasa.MarsRover.Plateau;
+using Nasa.MarsRover.LandingSurface;
 using Nasa.MarsRover.Report;
 using Nasa.MarsRover.Rovers;
 
@@ -15,14 +15,14 @@ namespace Nasa.MarsRover.Tests
         public class CommandCenter_Constructor
         {
             [Test]
-            public void Assigns_Plateau_to_CommandInvoker_for_use_in_commands()
+            public void Assigns_LandingSurface_to_CommandInvoker_for_use_in_commands()
             {
-                var mockPlateau = new Mock<IPlateau>();
+                var mockLandingSurface = new Mock<ILandingSurface>();
                 var mockCommandInvoker = new Mock<ICommandInvoker>();
 
-                var commandCenter = new CommandCenter(mockPlateau.Object, null, mockCommandInvoker.Object, null);
+                var commandCenter = new CommandCenter(mockLandingSurface.Object, null, mockCommandInvoker.Object, null);
                 
-                mockCommandInvoker.Verify(x => x.SetPlateau(mockPlateau.Object), Times.Once());
+                mockCommandInvoker.Verify(x => x.SetLandingSurface(mockLandingSurface.Object), Times.Once());
             }
 
             [Test]
@@ -57,17 +57,17 @@ namespace Nasa.MarsRover.Tests
         }
 
         [TestFixture]
-        public class CommandCenter_GetPlateau
+        public class CommandCenter_GetLandingSurface
         {
             [Test]
-            public void Returns_value_from_invocation_of_Plateau_GetPlateau()
+            public void Returns_injected_LandingSurface()
             {
-                var expectedPlateau = new Mock<IPlateau>();
-                var commandCenter = new CommandCenter(expectedPlateau.Object, null, null, null);
+                var expectedLandingSurface = new Mock<ILandingSurface>();
+                var commandCenter = new CommandCenter(expectedLandingSurface.Object, null, null, null);
 
-                var plateau = commandCenter.GetPlateau();
+                var landingSurface = commandCenter.GetLandingSurface();
 
-                Assert.AreEqual(expectedPlateau, plateau);
+                Assert.AreEqual(expectedLandingSurface, landingSurface);
             }
         }
 

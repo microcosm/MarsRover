@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Nasa.MarsRover.Plateau;
+using Nasa.MarsRover.LandingSurface;
 using Nasa.MarsRover.Rovers;
 
 namespace Nasa.MarsRover.Command
@@ -10,7 +10,7 @@ namespace Nasa.MarsRover.Command
         private readonly IRoverFactory roverFactory;
         private readonly IDictionary<CommandType, Action<ICommand>> setReceiversMethodDictionary;
 
-        private IPlateau plateau;
+        private ILandingSurface landingSurface;
         private IList<IRover> rovers;
         private IEnumerable<ICommand> commandList;
 
@@ -25,9 +25,9 @@ namespace Nasa.MarsRover.Command
             };
         }
 
-        public void SetPlateau(IPlateau aPlateau)
+        public void SetLandingSurface(ILandingSurface aLandingSurface)
         {
-            plateau = aPlateau;
+            landingSurface = aLandingSurface;
         }
 
         public void SetRovers(IList<IRover> someRovers)
@@ -58,7 +58,7 @@ namespace Nasa.MarsRover.Command
         private void SetReceiversOnGridSizeCommand(ICommand command)
         {
             var gridSizeCommand = (IGridSizeCommand) command;
-            gridSizeCommand.SetReceiver(plateau);
+            gridSizeCommand.SetReceiver(landingSurface);
         }
 
         private void SetReceiversOnRoverDeployCommand(ICommand command)
@@ -66,7 +66,7 @@ namespace Nasa.MarsRover.Command
             var roverDeployCommand = (IRoverDeployCommand) command;
             var newRover = roverFactory.CreateRover();
             rovers.Add(newRover);
-            roverDeployCommand.SetReceivers(newRover, plateau);
+            roverDeployCommand.SetReceivers(newRover, landingSurface);
         }
     }
 }

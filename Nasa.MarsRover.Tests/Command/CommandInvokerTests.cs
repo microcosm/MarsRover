@@ -2,7 +2,7 @@
 using Moq;
 using NUnit.Framework;
 using Nasa.MarsRover.Command;
-using Nasa.MarsRover.Plateau;
+using Nasa.MarsRover.LandingSurface;
 using Nasa.MarsRover.Rovers;
 
 namespace Nasa.MarsRover.Tests.Command
@@ -23,15 +23,15 @@ namespace Nasa.MarsRover.Tests.Command
         }
 
         [TestFixture]
-        public class CommandInvoker_SetPlateau
+        public class CommandInvoker_SetLandingSurface
         {
             [Test]
-            public void Accepts_new_Plateau()
+            public void Accepts_new_LandingSurface()
             {
-                var mockPlateau = new Mock<IPlateau>();
+                var mockLandingSurface = new Mock<ILandingSurface>();
                 var commandInvoker = new CommandInvoker(null);
                 Assert.DoesNotThrow(() =>
-                    commandInvoker.SetPlateau(mockPlateau.Object));
+                    commandInvoker.SetLandingSurface(mockLandingSurface.Object));
             }
         }
 
@@ -52,26 +52,26 @@ namespace Nasa.MarsRover.Tests.Command
         public class CommandInvoker_InvokeAll
         {
             [Test]
-            public void When_executing_GridSizeCommand_sets_Plateau_as_command_receiver()
+            public void When_executing_GridSizeCommand_sets_LandingSurface_as_command_receiver()
             {
-                var mockPlateau = new Mock<IPlateau>();
+                var mockLandingSurface = new Mock<ILandingSurface>();
                 var mockGridSizeCommand = new Mock<IGridSizeCommand>();
                 mockGridSizeCommand.Setup(x => x.GetCommandType()).Returns(CommandType.GridSizeCommand);
 
                 var commandInvoker = new CommandInvoker(null);
                 commandInvoker.Assign(new[] { mockGridSizeCommand.Object });
-                commandInvoker.SetPlateau(mockPlateau.Object);
+                commandInvoker.SetLandingSurface(mockLandingSurface.Object);
 
                 commandInvoker.InvokeAll();
                 
-                mockGridSizeCommand.Verify(x => x.SetReceiver(mockPlateau.Object), Times.Once());
+                mockGridSizeCommand.Verify(x => x.SetReceiver(mockLandingSurface.Object), Times.Once());
             }
 
             [Test]
-            public void When_executing_RoverDeployCommand_sets_Plateau_and_new_Rover_as_command_receivers()
+            public void When_executing_RoverDeployCommand_sets_LandingSurface_and_new_Rover_as_command_receivers()
             {
                 var mockRover = new Mock<IRover>();
-                var mockPlateau = new Mock<IPlateau>();
+                var mockLandingSurface = new Mock<ILandingSurface>();
                 var mockRoverDeployCommand = new Mock<IRoverDeployCommand>();
                 mockRoverDeployCommand.Setup(x => x.GetCommandType()).Returns(CommandType.RoverDeployCommand);
 
@@ -80,12 +80,12 @@ namespace Nasa.MarsRover.Tests.Command
 
                 var commandInvoker = new CommandInvoker(mockRoverFactory.Object);
                 commandInvoker.Assign(new[]{mockRoverDeployCommand.Object});
-                commandInvoker.SetPlateau(mockPlateau.Object);
+                commandInvoker.SetLandingSurface(mockLandingSurface.Object);
                 commandInvoker.SetRovers(new List<IRover>());
 
                 commandInvoker.InvokeAll();
 
-                mockRoverDeployCommand.Verify(x => x.SetReceivers(mockRover.Object, mockPlateau.Object), Times.Once());
+                mockRoverDeployCommand.Verify(x => x.SetReceivers(mockRover.Object, mockLandingSurface.Object), Times.Once());
             }
 
             [Test]

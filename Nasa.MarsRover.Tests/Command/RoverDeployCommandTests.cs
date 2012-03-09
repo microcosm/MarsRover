@@ -1,7 +1,7 @@
 ﻿using Moq;
 using NUnit.Framework;
 using Nasa.MarsRover.Command;
-using Nasa.MarsRover.Plateau;
+using Nasa.MarsRover.LandingSurface;
 using Nasa.MarsRover.Rovers;
 
 namespace Nasa.MarsRover.Tests.Command
@@ -33,10 +33,10 @@ namespace Nasa.MarsRover.Tests.Command
                 const CardinalDirection anyCardinalDirection = CardinalDirection.South;
                 var anyGridPoint = new GridPoint(0, 0);
                 var mockRover = new Mock<IRover>();
-                var mockPlateau = new Mock<IPlateau>();
+                var mockLandingSurface = new Mock<ILandingSurface>();
                 var gridSizeCommand = new RoverDeployCommand(anyGridPoint, anyCardinalDirection);
                 Assert.DoesNotThrow(() =>
-                    gridSizeCommand.SetReceivers(mockRover.Object, mockPlateau.Object));
+                    gridSizeCommand.SetReceivers(mockRover.Object, mockLandingSurface.Object));
             }
         }
 
@@ -50,14 +50,14 @@ namespace Nasa.MarsRover.Tests.Command
                 var expectedPoint = new GridPoint(0, 0);
 
                 var mockRover = new Mock<IRover>();
-                var mockPlateau = new Mock<IPlateau>();
+                var mockLandingSurface = new Mock<ILandingSurface>();
                 var roverDeployCommand = new RoverDeployCommand(expectedPoint, expectedCardinalDirection);
-                roverDeployCommand.SetReceivers(mockRover.Object, mockPlateau.Object);
+                roverDeployCommand.SetReceivers(mockRover.Object, mockLandingSurface.Object);
 
                 roverDeployCommand.Execute();
 
                 mockRover.Verify(x => 
-                    x.Deploy(mockPlateau.Object, expectedPoint, expectedCardinalDirection), Times.Once());
+                    x.Deploy(mockLandingSurface.Object, expectedPoint, expectedCardinalDirection), Times.Once());
             }
         }
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
-using Nasa.MarsRover.Plateau;
+using Nasa.MarsRover.LandingSurface;
 using Nasa.MarsRover.Report;
 using Nasa.MarsRover.Rovers;
 

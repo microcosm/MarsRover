@@ -1,6 +1,6 @@
 ﻿using Nasa.MarsRover.Command;
 using Nasa.MarsRover.Command.Interpret;
-using Nasa.MarsRover.Plateau;
+using Nasa.MarsRover.LandingSurface;
 using Nasa.MarsRover.Report;
 using Nasa.MarsRover.Rovers;
 using StructureMap;
@@ -13,7 +13,7 @@ namespace Nasa.MarsRover
         {
             ObjectFactory.Initialize(x =>
             {
-                x.For<IPlateau>().Use<GridPlateau>();
+                x.For<ILandingSurface>().Use<Plateau>();
                 x.For<GridPoint>().Use<GridPoint>();
                 x.For<GridSize>().Use<GridSize>();
                 x.For<IRoverDeployCommand>().Use<RoverDeployCommand>();

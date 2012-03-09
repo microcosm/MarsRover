@@ -1,4 +1,4 @@
-using Nasa.MarsRover.Plateau;
+using Nasa.MarsRover.LandingSurface;
 
 namespace Nasa.MarsRover.Rovers
 {
@@ -6,7 +6,7 @@ namespace Nasa.MarsRover.Rovers
     {
         GridPoint Position { get; set; }
         CardinalDirection CardinalDirection { get; set; }
-        void Deploy(IPlateau aPlateau, GridPoint aPlateauPoint, CardinalDirection aCardinalDirection);
+        void Deploy(ILandingSurface aLandingSurface, GridPoint aPlateauPoint, CardinalDirection aCardinalDirection);
         bool IsDeployed();
     }
 }

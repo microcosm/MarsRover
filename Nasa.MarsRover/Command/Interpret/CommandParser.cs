@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nasa.MarsRover.Plateau;
+using Nasa.MarsRover.LandingSurface;
 
 namespace Nasa.MarsRover.Command.Interpret
 {

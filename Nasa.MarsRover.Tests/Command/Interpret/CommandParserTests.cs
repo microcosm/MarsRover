@@ -3,7 +3,7 @@ using Moq;
 using NUnit.Framework;
 using Nasa.MarsRover.Command;
 using Nasa.MarsRover.Command.Interpret;
-using Nasa.MarsRover.Plateau;
+using Nasa.MarsRover.LandingSurface;
 
 namespace Nasa.MarsRover.Tests.Command.Interpret
 {

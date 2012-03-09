@@ -1,11 +1,11 @@
-﻿using Nasa.MarsRover.Plateau;
+﻿using Nasa.MarsRover.LandingSurface;
 
 namespace Nasa.MarsRover
 {
     public interface ICommandCenter
     {
         void Execute(string commandString);
-        IPlateau GetPlateau();
+        ILandingSurface GetLandingSurface();
         string GetCombinedRoverReport();
     }
 }

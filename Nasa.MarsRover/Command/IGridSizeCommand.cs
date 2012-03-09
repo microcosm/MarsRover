@@ -1,10 +1,10 @@
-using Nasa.MarsRover.Plateau;
+using Nasa.MarsRover.LandingSurface;
 
 namespace Nasa.MarsRover.Command
 {
     public interface IGridSizeCommand : ICommand
     {
         GridSize Size { get; }
-        void SetReceiver(IPlateau aPlateau);
+        void SetReceiver(ILandingSurface aLandingSurface);
     }
 }

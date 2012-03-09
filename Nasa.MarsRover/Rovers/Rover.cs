@@ -1,5 +1,5 @@
 ﻿using System;
-using Nasa.MarsRover.Plateau;
+using Nasa.MarsRover.LandingSurface;
 
 namespace Nasa.MarsRover.Rovers
 {
@@ -9,9 +9,9 @@ namespace Nasa.MarsRover.Rovers
         public CardinalDirection CardinalDirection { get; set; }
         private bool isDeployed;
 
-        public void Deploy(IPlateau aPlateau, GridPoint aPlateauPoint, CardinalDirection aCardinalDirection)
+        public void Deploy(ILandingSurface aLandingSurface, GridPoint aPlateauPoint, CardinalDirection aCardinalDirection)
         {
-            if (aPlateau.IsValid(aPlateauPoint))
+            if (aLandingSurface.IsValid(aPlateauPoint))
             {
                 Position = aPlateauPoint;
                 CardinalDirection = aCardinalDirection;
@@ -19,7 +19,7 @@ namespace Nasa.MarsRover.Rovers
                 return;
             }
 
-            throwDeployException(aPlateau, aPlateauPoint);
+            throwDeployException(aLandingSurface, aPlateauPoint);
         }
 
         public bool IsDeployed()
@@ -27,10 +27,10 @@ namespace Nasa.MarsRover.Rovers
             return isDeployed;
         }
 
-        private static void throwDeployException(IPlateau aPlateau, GridPoint aPlateauPoint)
+        private static void throwDeployException(ILandingSurface aLandingSurface, GridPoint aPlateauPoint)
         {
-            var plateauSize = aPlateau.GetSize();
-            var exceptionMessage = String.Format("Deploy failed for point ({0},{1}). Plateau size is {2} x {3}.",
+            var plateauSize = aLandingSurface.GetSize();
+            var exceptionMessage = String.Format("Deploy failed for point ({0},{1}). Landing surface size is {2} x {3}.",
                 aPlateauPoint.X, aPlateauPoint.Y, plateauSize.Width, plateauSize.Height);
             throw new RoverDeployException(exceptionMessage);
         }

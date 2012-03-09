@@ -1,13 +1,12 @@
-﻿using Moq;
-using NUnit.Framework;
-using Nasa.MarsRover.Plateau;
+﻿using NUnit.Framework;
+using Nasa.MarsRover.LandingSurface;
 
-namespace Nasa.MarsRover.Tests.Plateau
+namespace Nasa.MarsRover.Tests.LandingSurface
 {
-    public class GridPlateauTests
+    public class PlateauTests
     {
         [TestFixture]
-        public class GridPlateau_GetSize
+        public class Plateau_GetSize
         {
             [TestCase(1, 2)]
             [TestCase(4, 5)]
@@ -15,7 +14,7 @@ namespace Nasa.MarsRover.Tests.Plateau
             {
                 var expectedSize = new GridSize(expectedWidth, expectedHeight);
                 
-                var grid = new GridPlateau();
+                var grid = new Plateau();
                 grid.SetSize(expectedSize);
 
                 var gridSize = grid.GetSize();
@@ -25,7 +24,7 @@ namespace Nasa.MarsRover.Tests.Plateau
         }
 
         [TestFixture]
-        public class GridPlateau_IsValidPoint
+        public class Plateau_IsValidPoint
         {
             [TestCase(1, 1, 0, 0)]
             [TestCase(1, 1, 1, 1)]
@@ -35,7 +34,7 @@ namespace Nasa.MarsRover.Tests.Plateau
                 var size = new GridSize(boundaryX, boundaryY);
                 var point = new GridPoint(attemptedPointX, attemptedPointY);
 
-                var grid = new GridPlateau();
+                var grid = new Plateau();
                 grid.SetSize(size);
 
                 var isValid = grid.IsValid(point);
@@ -52,7 +51,7 @@ namespace Nasa.MarsRover.Tests.Plateau
                 var size = new GridSize(boundaryX, boundaryY);
                 var point = new GridPoint(attemptedX, attemptedY);
 
-                var grid = new GridPlateau();
+                var grid = new Plateau();
                 grid.SetSize(size);
 
                 var isValid = grid.IsValid(point);

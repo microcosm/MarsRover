@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Nasa.MarsRover.Command;
 using Nasa.MarsRover.Command.Interpret;
-using Nasa.MarsRover.Plateau;
+using Nasa.MarsRover.LandingSurface;
 using Nasa.MarsRover.Report;
 using Nasa.MarsRover.Rovers;
 
@@ -9,21 +9,21 @@ namespace Nasa.MarsRover
 {
     public class CommandCenter : ICommandCenter
     {
-        private readonly IPlateau plateau;
+        private readonly ILandingSurface landingSurface;
         private readonly ICommandParser commandParser;
         private readonly ICommandInvoker commandInvoker;
         private readonly IReportComposer reportComposer;
 
         private readonly IList<IRover> rovers; 
 
-        public CommandCenter(IPlateau aPlateau, ICommandParser aCommandParser, ICommandInvoker aCommandInvoker, IReportComposer aReportComposer)
+        public CommandCenter(ILandingSurface aLandingSurface, ICommandParser aCommandParser, ICommandInvoker aCommandInvoker, IReportComposer aReportComposer)
         {
             rovers = new List<IRover>();
-            plateau = aPlateau;
+            landingSurface = aLandingSurface;
             commandParser = aCommandParser;
             commandInvoker = aCommandInvoker;
             reportComposer = aReportComposer;
-            commandInvoker.SetPlateau(plateau);
+            commandInvoker.SetLandingSurface(landingSurface);
             commandInvoker.SetRovers(rovers);
         }
 
@@ -34,9 +34,9 @@ namespace Nasa.MarsRover
             commandInvoker.InvokeAll();
         }
 
-        public IPlateau GetPlateau()
+        public ILandingSurface GetLandingSurface()
         {
-            return plateau;
+            return landingSurface;
         }
 
         public string GetCombinedRoverReport()

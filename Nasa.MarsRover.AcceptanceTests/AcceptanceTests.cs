@@ -1,6 +1,6 @@
 ﻿using System.Text;
 using NUnit.Framework;
-using Nasa.MarsRover.Plateau;
+using Nasa.MarsRover.LandingSurface;
 using StructureMap;
 
 namespace Nasa.MarsRover.AcceptanceTests
@@ -16,14 +16,14 @@ namespace Nasa.MarsRover.AcceptanceTests
 
         [TestCase("5 5", 5, 5)]
         [TestCase("2 3", 2, 3)]
-        public void Given_a_commandString_with_one_grid_size_command_creates_Plateau_and_sets_size(string gridSizeCommandString, int expectedWidth, int expectedHeight)
+        public void Given_a_commandString_with_one_grid_size_command_creates_LandingSurface_and_sets_size(string gridSizeCommandString, int expectedWidth, int expectedHeight)
         {
-            var expectedPlateauSize = new GridSize(expectedWidth, expectedHeight);
+            var expectedSize = new GridSize(expectedWidth, expectedHeight);
             var commandCenter = ObjectFactory.GetInstance<ICommandCenter>();
             commandCenter.Execute(gridSizeCommandString);
-            var plateau = commandCenter.GetPlateau();
-            var plateauSize = plateau.GetSize();
-            Assert.AreEqual(expectedPlateauSize, plateauSize);
+            var landingSurface = commandCenter.GetLandingSurface();
+            var actualSize = landingSurface.GetSize();
+            Assert.AreEqual(expectedSize, actualSize);
         }
 
         [TestCase("1 2 N")]

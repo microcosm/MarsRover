@@ -61,7 +61,7 @@
     <Compile Include="Command\Interpret\CommandParserTests.cs" />
     <Compile Include="Command\Interpret\CommandSetMatcherTests.cs" />
     <Compile Include="Command\GridSizeCommandTests.cs" />
-    <Compile Include="Plateau\GridPlateauTests.cs" />
+    <Compile Include="LandingSurface\PlateauTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\ReportComposerTests.cs" />
     <Compile Include="Rovers\RoverTests.cs" />

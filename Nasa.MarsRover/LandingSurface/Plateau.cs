@@ -1,6 +1,6 @@
-﻿namespace Nasa.MarsRover.Plateau
+﻿namespace Nasa.MarsRover.LandingSurface
 {
-    public class GridPlateau : IPlateau
+    public class Plateau : ILandingSurface
     {
         private GridSize gridSize { get; set; }
 
