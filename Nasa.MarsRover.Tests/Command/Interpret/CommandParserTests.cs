@@ -26,15 +26,15 @@ namespace Nasa.MarsRover.Tests.Command.Interpret
 
             [TestCase("1 2", 1, 2)]
             [TestCase("467 54", 467, 54)]
-            public void When_Command_is_GridSizeCommand_invokes_CommandFactory_CreateGridSizeCommand_with_parsed_values(string gridSizeCommand, int expectedWidth, int expectedHeight)
+            public void When_Command_is_LandingSurfaceSizeCommand_invokes_CommandFactory_CreateLandingSurfaceSizeCommand_with_parsed_values(string landingSurfaceSizeCommand, int expectedWidth, int expectedHeight)
             {
-                mockCommandMatcher.Setup(x => x.GetCommandType(gridSizeCommand))
-                    .Returns(CommandType.GridSizeCommand);
+                mockCommandMatcher.Setup(x => x.GetCommandType(landingSurfaceSizeCommand))
+                    .Returns(CommandType.LandingSurfaceSizeCommand);
                 
-                commandParser.Parse(gridSizeCommand);
+                commandParser.Parse(landingSurfaceSizeCommand);
 
                 mockCommandFactory.Verify(x => 
-                    x.CreateGridSizeCommand(expectedWidth, expectedHeight), Times.Once());
+                    x.CreateLandingSurfaceSizeCommand(expectedWidth, expectedHeight), Times.Once());
             }
 
             [TestCase("1 2 N", 1, 2, CardinalDirection.North)]
@@ -55,19 +55,19 @@ namespace Nasa.MarsRover.Tests.Command.Interpret
             }
 
             [Test]
-            public void When_Command_is_GridSizeCommand_returns_given_value_from_invocation_of_CommandFactory_CreateGridSizeCommand()
+            public void When_Command_is_LandingSurfaceSizeCommand_returns_given_value_from_invocation_of_CommandFactory_CreateLandingSurfaceSizeCommand()
             {
-                const string gridSizeCommand = "2 3";
+                const string landingSurfaceSizeCommand = "2 3";
 
-                mockCommandMatcher.Setup(x => x.GetCommandType(gridSizeCommand))
-                    .Returns(CommandType.GridSizeCommand);
-                var mockGridSizeCommand = new Mock<IGridSizeCommand>();
-                mockCommandFactory.Setup(x => x.CreateGridSizeCommand(It.IsAny<int>(), It.IsAny<int>()))
-                    .Returns(mockGridSizeCommand.Object);
+                mockCommandMatcher.Setup(x => x.GetCommandType(landingSurfaceSizeCommand))
+                    .Returns(CommandType.LandingSurfaceSizeCommand);
+                var mockLandingSurfaceSizeCommand = new Mock<ILandingSurfaceSizeCommand>();
+                mockCommandFactory.Setup(x => x.CreateLandingSurfaceSizeCommand(It.IsAny<int>(), It.IsAny<int>()))
+                    .Returns(mockLandingSurfaceSizeCommand.Object);
 
-                var commands = commandParser.Parse(gridSizeCommand);
+                var commands = commandParser.Parse(landingSurfaceSizeCommand);
 
-                Assert.AreEqual(mockGridSizeCommand.Object, commands.First());
+                Assert.AreEqual(mockLandingSurfaceSizeCommand.Object, commands.First());
             }
 
             [Test]

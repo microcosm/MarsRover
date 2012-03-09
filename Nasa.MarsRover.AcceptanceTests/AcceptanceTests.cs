@@ -16,11 +16,11 @@ namespace Nasa.MarsRover.AcceptanceTests
 
         [TestCase("5 5", 5, 5)]
         [TestCase("2 3", 2, 3)]
-        public void Given_a_commandString_with_one_GridSizeCommand_creates_LandingSurface_and_sets_size(string gridSizeCommandString, int expectedWidth, int expectedHeight)
+        public void Given_a_commandString_with_one_LandingSurfaceSizeCommand_creates_LandingSurface_and_sets_size(string landingSurfaceSizeCommandString, int expectedWidth, int expectedHeight)
         {
             var expectedSize = new Size(expectedWidth, expectedHeight);
             var commandCenter = ObjectFactory.GetInstance<ICommandCenter>();
-            commandCenter.Execute(gridSizeCommandString);
+            commandCenter.Execute(landingSurfaceSizeCommandString);
             var landingSurface = commandCenter.GetLandingSurface();
             var actualSize = landingSurface.GetSize();
             Assert.AreEqual(expectedSize, actualSize);
@@ -32,7 +32,7 @@ namespace Nasa.MarsRover.AcceptanceTests
         [TestCase("1 2 W")]
         public void Given_a_commandString_with_one_RoverDeployCommand_rovers_deploy_and_report_without_moving(string roverDeployCommand)
         {
-            var commandString = prependGridSizeCommand(roverDeployCommand);
+            var commandString = prependLandingSurfaceSizeCommand(roverDeployCommand);
             var commandCenter = ObjectFactory.GetInstance<ICommandCenter>();
             commandCenter.Execute(commandString);
             var roverReports = commandCenter.GetCombinedRoverReport().Split('\n');
@@ -40,11 +40,11 @@ namespace Nasa.MarsRover.AcceptanceTests
             Assert.AreEqual(roverDeployCommand, roverReports[0]);
         }
 
-        private static string prependGridSizeCommand(string roverDeployCommand)
+        private static string prependLandingSurfaceSizeCommand(string roverDeployCommand)
         {
-            const string gridSizeCommand = "9 9";
+            const string landingSurfaceSizeCommand = "9 9";
             var commandString = new StringBuilder();
-            commandString.AppendLine(gridSizeCommand);
+            commandString.AppendLine(landingSurfaceSizeCommand);
             commandString.Append(roverDeployCommand);
             return commandString.ToString();
         }

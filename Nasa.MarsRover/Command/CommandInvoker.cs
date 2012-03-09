@@ -20,7 +20,7 @@ namespace Nasa.MarsRover.Command
             
             setReceiversMethodDictionary = new Dictionary<CommandType, Action<ICommand>>
             {
-                {CommandType.GridSizeCommand, SetReceiversOnGridSizeCommand},
+                {CommandType.LandingSurfaceSizeCommand, SetReceiversOnLandingSurfaceSizeCommand},
                 {CommandType.RoverDeployCommand, SetReceiversOnRoverDeployCommand}
             };
         }
@@ -55,10 +55,10 @@ namespace Nasa.MarsRover.Command
                 .Invoke(command);
         }
 
-        private void SetReceiversOnGridSizeCommand(ICommand command)
+        private void SetReceiversOnLandingSurfaceSizeCommand(ICommand command)
         {
-            var gridSizeCommand = (IGridSizeCommand) command;
-            gridSizeCommand.SetReceiver(landingSurface);
+            var landingSurfaceSizeCommand = (ILandingSurfaceSizeCommand) command;
+            landingSurfaceSizeCommand.SetReceiver(landingSurface);
         }
 
         private void SetReceiversOnRoverDeployCommand(ICommand command)

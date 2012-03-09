@@ -9,8 +9,8 @@ namespace Nasa.MarsRover.Tests.Command.Interpret
         [TestFixture]
         public class CommandMatcher_GetCommandType
         {
-            [TestCase("2 3", CommandType.GridSizeCommand)]
-            [TestCase("162 30", CommandType.GridSizeCommand)]
+            [TestCase("2 3", CommandType.LandingSurfaceSizeCommand)]
+            [TestCase("162 30", CommandType.LandingSurfaceSizeCommand)]
             [TestCase("3 4 E", CommandType.RoverDeployCommand)]
             [TestCase("3 482 S", CommandType.RoverDeployCommand)]
             [TestCase("563 8 W", CommandType.RoverDeployCommand)]

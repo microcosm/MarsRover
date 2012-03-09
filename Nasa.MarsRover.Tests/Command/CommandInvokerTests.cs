@@ -52,19 +52,19 @@ namespace Nasa.MarsRover.Tests.Command
         public class CommandInvoker_InvokeAll
         {
             [Test]
-            public void When_executing_GridSizeCommand_sets_LandingSurface_as_command_receiver()
+            public void When_executing_LandingSurfaceSizeCommand_sets_LandingSurface_as_command_receiver()
             {
                 var mockLandingSurface = new Mock<ILandingSurface>();
-                var mockGridSizeCommand = new Mock<IGridSizeCommand>();
-                mockGridSizeCommand.Setup(x => x.GetCommandType()).Returns(CommandType.GridSizeCommand);
+                var landingSurfaceSizeCommand = new Mock<ILandingSurfaceSizeCommand>();
+                landingSurfaceSizeCommand.Setup(x => x.GetCommandType()).Returns(CommandType.LandingSurfaceSizeCommand);
 
                 var commandInvoker = new CommandInvoker(null);
-                commandInvoker.Assign(new[] { mockGridSizeCommand.Object });
+                commandInvoker.Assign(new[] { landingSurfaceSizeCommand.Object });
                 commandInvoker.SetLandingSurface(mockLandingSurface.Object);
 
                 commandInvoker.InvokeAll();
                 
-                mockGridSizeCommand.Verify(x => x.SetReceiver(mockLandingSurface.Object), Times.Once());
+                landingSurfaceSizeCommand.Verify(x => x.SetReceiver(mockLandingSurface.Object), Times.Once());
             }
 
             [Test]
@@ -91,15 +91,15 @@ namespace Nasa.MarsRover.Tests.Command
             [Test]
             public void Invokes_Execute_for_each_command()
             {
-                var mockGridSizeCommand = new Mock<IGridSizeCommand>();
-                mockGridSizeCommand.Setup(x => x.GetCommandType()).Returns(CommandType.GridSizeCommand);
+                var mockLandingSurfaceSizeCommand = new Mock<ILandingSurfaceSizeCommand>();
+                mockLandingSurfaceSizeCommand.Setup(x => x.GetCommandType()).Returns(CommandType.LandingSurfaceSizeCommand);
 
                 var commandInvoker = new CommandInvoker(null);
-                commandInvoker.Assign(new[] { mockGridSizeCommand.Object, mockGridSizeCommand.Object, mockGridSizeCommand.Object });
+                commandInvoker.Assign(new[] { mockLandingSurfaceSizeCommand.Object, mockLandingSurfaceSizeCommand.Object, mockLandingSurfaceSizeCommand.Object });
 
                 commandInvoker.InvokeAll();
                 
-                mockGridSizeCommand.Verify(x => x.Execute(), Times.Exactly(3));
+                mockLandingSurfaceSizeCommand.Verify(x => x.Execute(), Times.Exactly(3));
             }
         }
     }

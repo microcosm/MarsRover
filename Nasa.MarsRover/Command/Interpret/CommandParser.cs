@@ -18,7 +18,7 @@ namespace Nasa.MarsRover.Command.Interpret
             commandFactory = aCommandFactory;
             commandParserDictionary = new Dictionary<CommandType, Func<string, ICommand>>
             {
-                 {CommandType.GridSizeCommand, ParseGridSizeCommand},
+                 {CommandType.LandingSurfaceSizeCommand, ParseLandingSurfaceSizeCommand},
                  {CommandType.RoverDeployCommand, ParseRoverDeployCommand}
             };
             cardinalDirectionDictionary = new Dictionary<char, CardinalDirection>
@@ -38,13 +38,13 @@ namespace Nasa.MarsRover.Command.Interpret
                     .Invoke(command)).ToList();
         }
 
-        private ICommand ParseGridSizeCommand(string toParse)
+        private ICommand ParseLandingSurfaceSizeCommand(string toParse)
         {
             var arguments = toParse.Split(' ');
             var width = int.Parse(arguments[0]);
             var height = int.Parse(arguments[1]);
             
-            var populatedCommand = commandFactory.CreateGridSizeCommand(width, height);
+            var populatedCommand = commandFactory.CreateLandingSurfaceSizeCommand(width, height);
             return populatedCommand;
         }
 

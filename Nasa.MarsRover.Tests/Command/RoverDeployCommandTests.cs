@@ -34,9 +34,9 @@ namespace Nasa.MarsRover.Tests.Command
                 var anyPoint = new Point(0, 0);
                 var mockRover = new Mock<IRover>();
                 var mockLandingSurface = new Mock<ILandingSurface>();
-                var gridSizeCommand = new RoverDeployCommand(anyPoint, anyCardinalDirection);
+                var landingSurfaceSizeCommand = new RoverDeployCommand(anyPoint, anyCardinalDirection);
                 Assert.DoesNotThrow(() =>
-                    gridSizeCommand.SetReceivers(mockRover.Object, mockLandingSurface.Object));
+                    landingSurfaceSizeCommand.SetReceivers(mockRover.Object, mockLandingSurface.Object));
             }
         }
 

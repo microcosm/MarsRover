@@ -72,10 +72,10 @@
     <Compile Include="LandingSurface\Point.cs" />
     <Compile Include="Command\Interpret\CommandParser.cs" />
     <Compile Include="Command\Interpret\CommandException.cs" />
-    <Compile Include="Command\GridSizeCommand.cs" />
+    <Compile Include="Command\LandingSurfaceSizeCommand.cs" />
     <Compile Include="Command\ICommand.cs" />
     <Compile Include="Command\Interpret\ICommandParser.cs" />
-    <Compile Include="Command\IGridSizeCommand.cs" />
+    <Compile Include="Command\ILandingSurfaceSizeCommand.cs" />
     <Compile Include="LandingSurface\Plateau.cs" />
     <Compile Include="LandingSurface\Size.cs" />
     <Compile Include="LandingSurface\ILandingSurface.cs" />

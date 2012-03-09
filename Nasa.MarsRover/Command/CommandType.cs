@@ -2,7 +2,7 @@
 {
     public enum CommandType
     {
-        GridSizeCommand,
+        LandingSurfaceSizeCommand,
         RoverDeployCommand
     }
 }

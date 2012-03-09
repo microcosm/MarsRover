@@ -5,60 +5,60 @@ using Nasa.MarsRover.LandingSurface;
 
 namespace Nasa.MarsRover.Tests.Command
 {
-    public class GridSizeCommandTests
+    public class LandingSurfaceSizeCommandTests
     {
         [TestFixture]
-        public class GridSizeCommand_Constructor
+        public class LandingSurfaceSizeCommand_Constructor
         {
             [Test]
             public void Given_a_size_argument_exposes_as_public_property()
             {
                 var size = new Size(1, 2);
-                var gridSizeCommand = new GridSizeCommand(size);
-                Assert.AreEqual(size, gridSizeCommand.Size);
+                var landingSurfaceSizeCommand = new LandingSurfaceSizeCommand(size);
+                Assert.AreEqual(size, landingSurfaceSizeCommand.Size);
             }
         }
 
         [TestFixture]
-        public class GridSizeCommand_SetReceiver
+        public class LandingSurfaceSizeCommand_SetReceiver
         {
             [Test]
             public void Should_accept_Receiver_argument()
             {
                 var anySize = new Size(0, 0);
                 var mockLandingSurface = new Mock<ILandingSurface>();
-                var gridSizeCommand = new GridSizeCommand(anySize);
+                var landingSurfaceSizeCommand = new LandingSurfaceSizeCommand(anySize);
                 Assert.DoesNotThrow(() =>
-                    gridSizeCommand.SetReceiver(mockLandingSurface.Object));
+                    landingSurfaceSizeCommand.SetReceiver(mockLandingSurface.Object));
             }
         }
 
         [TestFixture]
-        public class GridSizeCommand_Execute
+        public class LandingSurfaceSizeCommand_Execute
         {
             [Test]
             public void Should_set_LandingSurface_size()
             {
                 var mockLandingSurface = new Mock<ILandingSurface>();
                 var anySize = new Size(0, 0);
-                var gridSizeCommand = new GridSizeCommand(anySize);
-                gridSizeCommand.SetReceiver(mockLandingSurface.Object);
+                var landingSurfaceSizeCommand = new LandingSurfaceSizeCommand(anySize);
+                landingSurfaceSizeCommand.SetReceiver(mockLandingSurface.Object);
 
-                gridSizeCommand.Execute();
+                landingSurfaceSizeCommand.Execute();
 
                 mockLandingSurface.Verify(x => x.SetSize(anySize), Times.Once());
             }
         }
 
         [TestFixture]
-        public class GridSizeCommand_GetCommandType
+        public class LandingSurfaceSizeCommand_GetCommandType
         {
             [Test]
-            public void Should_return_GridSizeCommand_type()
+            public void Should_return_LandingSurfaceSizeCommand_type()
             {
                 var size = new Size(0, 0);
-                var gridSizeCommand = new GridSizeCommand(size);
-                Assert.AreEqual(gridSizeCommand.GetCommandType(), CommandType.GridSizeCommand);
+                var landingSurfaceSizeCommand = new LandingSurfaceSizeCommand(size);
+                Assert.AreEqual(landingSurfaceSizeCommand.GetCommandType(), CommandType.LandingSurfaceSizeCommand);
             }
         }
     }

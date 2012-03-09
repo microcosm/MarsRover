@@ -17,7 +17,7 @@ namespace Nasa.MarsRover
                 x.For<Point>().Use<Point>();
                 x.For<Size>().Use<Size>();
                 x.For<IRoverDeployCommand>().Use<RoverDeployCommand>();
-                x.For<IGridSizeCommand>().Use<GridSizeCommand>();
+                x.For<ILandingSurfaceSizeCommand>().Use<LandingSurfaceSizeCommand>();
                 x.For<ICommandInvoker>().Use<CommandInvoker>();
                 x.For<ICommandMatcher>().Use<CommandMatcher>();
                 x.For<ICommandParser>().Use<CommandParser>();
