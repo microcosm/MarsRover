@@ -24,7 +24,7 @@ namespace Nasa.MarsRover
                 x.For<ICommandFactory>().Use<CommandFactory>();
                 x.For<IRoverFactory>().Use<RoverFactory>();
                 x.For<IRover>().Use<Rover>();
-                x.For<IReportComposer>().Use<ReportComposer>();
+                x.For<IReportComposer>().Use<ConsoleReportComposer>();
                 x.For<ICommandCenter>().Use<CommandCenter>();
             });
         }

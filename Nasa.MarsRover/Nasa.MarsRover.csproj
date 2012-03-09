@@ -56,7 +56,7 @@
     <Compile Include="Command\ICommandInvoker.cs" />
     <Compile Include="ICommandCenter.cs" />
     <Compile Include="Report\IReportComposer.cs" />
-    <Compile Include="Report\ReportComposer.cs" />
+    <Compile Include="Report\ConsoleReportComposer.cs" />
     <Compile Include="Report\ReportException.cs" />
     <Compile Include="Rovers\IRoverFactory.cs" />
     <Compile Include="Rovers\RoverFactory.cs" />

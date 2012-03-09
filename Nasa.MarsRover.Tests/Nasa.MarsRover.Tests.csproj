@@ -59,11 +59,11 @@
     <Compile Include="Command\CommandInvokerTests.cs" />
     <Compile Include="Command\RoverDeployCommandTests.cs" />
     <Compile Include="Command\Interpret\CommandParserTests.cs" />
-    <Compile Include="Command\Interpret\CommandSetMatcherTests.cs" />
-    <Compile Include="Command\GridSizeCommandTests.cs" />
+    <Compile Include="Command\Interpret\CommandMatcherTests.cs" />
+    <Compile Include="Command\LandingSurfaceSizeCommandTests.cs" />
     <Compile Include="LandingSurface\PlateauTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Report\ReportComposerTests.cs" />
+    <Compile Include="Report\ConsoleReportComposerTests.cs" />
     <Compile Include="Rovers\RoverTests.cs" />
   </ItemGroup>
   <ItemGroup>

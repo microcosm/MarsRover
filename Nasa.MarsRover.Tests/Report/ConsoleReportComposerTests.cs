@@ -7,10 +7,10 @@ using Nasa.MarsRover.Rovers;
 
 namespace Nasa.MarsRover.Tests.Report
 {
-    public class ReportComposerTests
+    public class ConsoleReportComposerTests
     {
         [TestFixture]
-        public class ReportComposer_Compose
+        public class ConsoleReportComposer_Compose
         {
             [TestCase(1, 2, CardinalDirection.North, "1 2 N")]
             [TestCase(3, 4, CardinalDirection.East, "3 4 E")]
@@ -20,14 +20,14 @@ namespace Nasa.MarsRover.Tests.Report
             {
                 var point = new Point(coordinateX, coordinateY);
 
-                var reportComposer = new ReportComposer();
+                var reportComposer = new ConsoleReportComposer();
                 var report = reportComposer.Compose(point, cardinalDirection);
                 Assert.AreEqual(expectedReport, report);
             }
         }
 
         [TestFixture]
-        public class ReportComposer_CompileReports
+        public class ConsoleReportComposer_CompileReports
         {
             [Test]
             public void When_any_Rover_not_deployed_should_throw_ReportException()
@@ -36,7 +36,7 @@ namespace Nasa.MarsRover.Tests.Report
                 mockRover.Setup(x => x.IsDeployed()).Returns(false);
                 var rovers = new List<IRover> {mockRover.Object};
 
-                var reportComposer = new ReportComposer();
+                var reportComposer = new ConsoleReportComposer();
                 
                 Assert.Throws<ReportException>(() => reportComposer.CompileReports(rovers));
             }
@@ -48,7 +48,7 @@ namespace Nasa.MarsRover.Tests.Report
                 mockRover.Setup(x => x.IsDeployed()).Returns(true);
                 var rovers = new List<IRover> {mockRover.Object, mockRover.Object, mockRover.Object};
 
-                var reportComposer = new ReportComposer();
+                var reportComposer = new ConsoleReportComposer();
                 reportComposer.CompileReports(rovers);
                     
                 mockRover.VerifyGet(x => x.Position, Times.Exactly(3));

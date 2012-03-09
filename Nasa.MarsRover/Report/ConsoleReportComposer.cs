@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
 using Nasa.MarsRover.LandingSurface;
 using Nasa.MarsRover.Rovers;
 
 namespace Nasa.MarsRover.Report
 {
-    public class ReportComposer : IReportComposer
+    public class ConsoleReportComposer : IReportComposer
     {
         private readonly IDictionary<CardinalDirection, char> cardinalDirectionDictionary;
 
-        public ReportComposer()
+        public ConsoleReportComposer()
         {
             cardinalDirectionDictionary = new Dictionary<CardinalDirection, char>
             {
