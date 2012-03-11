@@ -35,7 +35,8 @@ namespace Nasa.MarsRover.Command.Interpret
             commandTypeDictionary = new Dictionary<string, CommandType>
             {
                 { @"^\d+ \d+$", CommandType.LandingSurfaceSizeCommand },
-                { @"^\d+ \d+ [NSEW]$", CommandType.RoverDeployCommand }
+                { @"^\d+ \d+ [NSEW]$", CommandType.RoverDeployCommand },
+                { @"^[LRM]+$", CommandType.RoverExploreCommand }
             };
         }
     }

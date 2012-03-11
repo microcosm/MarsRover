@@ -3,6 +3,7 @@
     public enum CommandType
     {
         LandingSurfaceSizeCommand,
-        RoverDeployCommand
+        RoverDeployCommand,
+        RoverExploreCommand
     }
 }

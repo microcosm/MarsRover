@@ -15,6 +15,12 @@ namespace Nasa.MarsRover.Tests.Command.Interpret
             [TestCase("3 482 S", CommandType.RoverDeployCommand)]
             [TestCase("563 8 W", CommandType.RoverDeployCommand)]
             [TestCase("6 8 N", CommandType.RoverDeployCommand)]
+            [TestCase("L", CommandType.RoverExploreCommand)]
+            [TestCase("R", CommandType.RoverExploreCommand)]
+            [TestCase("M", CommandType.RoverExploreCommand)]
+            [TestCase("MML", CommandType.RoverExploreCommand)]
+            [TestCase("LR", CommandType.RoverExploreCommand)]
+            [TestCase("LRMLRMLRM", CommandType.RoverExploreCommand)]
             public void Given_command_should_return_correct_command_type(string command, CommandType expectedCommandType)
             {
                 var commandMatcher = new CommandMatcher();
@@ -30,6 +36,11 @@ namespace Nasa.MarsRover.Tests.Command.Interpret
             [TestCase("6 8 n")]
             [TestCase("6 8 T")]
             [TestCase("N 8 4")]
+            [TestCase("l")]
+            [TestCase("r")]
+            [TestCase("m")]
+            [TestCase("lrm")]
+            [TestCase("L R M")]
             public void Given_invalid_command_should_throw_CommandException(string invalidCommand)
             {
                 var commandMatcher = new CommandMatcher();
