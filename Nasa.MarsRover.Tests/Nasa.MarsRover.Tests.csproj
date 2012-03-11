@@ -58,6 +58,7 @@
     <Compile Include="Command\Interpret\CommandParserTests.cs" />
     <Compile Include="Command\Interpret\CommandMatcherTests.cs" />
     <Compile Include="Command\LandingSurfaceSizeCommandTests.cs" />
+    <Compile Include="Command\RoverExploreCommandTests.cs" />
     <Compile Include="LandingSurface\PlateauTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\ConsoleReportComposerTests.cs" />

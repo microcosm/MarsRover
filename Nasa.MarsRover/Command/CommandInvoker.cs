@@ -74,7 +74,7 @@ namespace Nasa.MarsRover.Command
         {
             var roverExploreCommand = (IRoverExploreCommand) command;
             var latestRover = rovers[rovers.Count - 1];
-            roverExploreCommand.SetReceivers(latestRover, landingSurface);
+            roverExploreCommand.SetReceiver(latestRover);
         }
     }
 }

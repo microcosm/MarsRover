@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Nasa.MarsRover.LandingSurface;
 
 namespace Nasa.MarsRover.Rovers
@@ -20,6 +21,11 @@ namespace Nasa.MarsRover.Rovers
             }
 
             throwDeployException(aLandingSurface, aPoint);
+        }
+
+        public void Move(IEnumerable<Movement> movements)
+        {
+            throw new NotImplementedException();
         }
 
         public bool IsDeployed()

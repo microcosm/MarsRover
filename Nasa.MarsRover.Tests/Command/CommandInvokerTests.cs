@@ -92,23 +92,21 @@ namespace Nasa.MarsRover.Tests.Command
             }
 
             [Test]
-            public void When_executing_RoverExploreCommand_sets_LandingSurface_and_most_recently_added_Rover_as_command_receivers()
+            public void When_executing_RoverExploreCommand_sets_most_recently_added_Rover_as_command_receiver()
             {
                 var expectedRover = new Mock<IRover>();
-                var expectedLandingSurface = new Mock<ILandingSurface>();
                 
                 var mockRoverExploreCommand = new Mock<IRoverExploreCommand>();
                 mockRoverExploreCommand.Setup(x => x.GetCommandType()).Returns(CommandType.RoverExploreCommand);
 
                 var commandInvoker = new CommandInvoker(null);
                 commandInvoker.Assign(new[]{mockRoverExploreCommand.Object});
-                commandInvoker.SetLandingSurface(expectedLandingSurface.Object);
                 commandInvoker.SetRovers(new List<IRover>{ null, expectedRover.Object });
 
                 commandInvoker.InvokeAll();
 
                 mockRoverExploreCommand.Verify(
-                    x => x.SetReceivers(expectedRover.Object, expectedLandingSurface.Object), Times.Once());
+                    x => x.SetReceiver(expectedRover.Object), Times.Once());
             }
 
             [Test]
