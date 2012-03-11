@@ -1,25 +1,35 @@
 ﻿using System;
+using System.Reflection;
 using System.Text;
-using StructureMap;
+using Autofac;
 
 namespace Nasa.MarsRover
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            Bootstrapper.Bootstrap();
             var commandString = buildCommandString();
-            var roverReports = executeCommandString(commandString);
-            displayToConsole(commandString, roverReports);
+            var containerBuilder = createContainerBuilder();
+
+            using (var container = containerBuilder.Build())
+            {
+                var roverCommandCenter = container.Resolve<ICommandCenter>();
+                roverCommandCenter.Execute(commandString);
+                var roverReports = roverCommandCenter.GetCombinedRoverReport();
+                displayToConsole(commandString, roverReports);
+            }
         }
 
-        private static string executeCommandString(string commandString)
+        private static ContainerBuilder createContainerBuilder()
         {
-            var commandCenter = ObjectFactory.GetInstance<ICommandCenter>();
-            commandCenter.Execute(commandString);
-            var roverReports = commandCenter.GetCombinedRoverReport();
-            return roverReports;
+            var programAssembly = Assembly.GetExecutingAssembly();
+
+            var builder = new ContainerBuilder();
+            builder.RegisterAssemblyTypes(programAssembly)
+                .AsImplementedInterfaces();
+
+            return builder;
         }
 
         private static void displayToConsole(string commandString, string roverReports)

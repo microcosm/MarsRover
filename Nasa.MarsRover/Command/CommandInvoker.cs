@@ -7,14 +7,14 @@ namespace Nasa.MarsRover.Command
 {
     public class CommandInvoker : ICommandInvoker
     {
-        private readonly IRoverFactory roverFactory;
+        private readonly Func<IRover> roverFactory;
         private readonly IDictionary<CommandType, Action<ICommand>> setReceiversMethodDictionary;
 
         private ILandingSurface landingSurface;
         private IList<IRover> rovers;
         private IEnumerable<ICommand> commandList;
 
-        public CommandInvoker(IRoverFactory aRoverFactory)
+        public CommandInvoker(Func<IRover> aRoverFactory)
         {
             roverFactory = aRoverFactory;
             
@@ -64,7 +64,7 @@ namespace Nasa.MarsRover.Command
         private void SetReceiversOnRoverDeployCommand(ICommand command)
         {
             var roverDeployCommand = (IRoverDeployCommand) command;
-            var newRover = roverFactory.CreateRover();
+            var newRover = roverFactory();
             rovers.Add(newRover);
             roverDeployCommand.SetReceivers(newRover, landingSurface);
         }
