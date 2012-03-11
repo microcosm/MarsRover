@@ -92,17 +92,37 @@ namespace Nasa.MarsRover.Tests.Command
             }
 
             [Test]
-            public void Invokes_Execute_for_each_command()
+            public void When_executing_RoverExploreCommand_sets_LandingSurface_and_most_recently_added_Rover_as_command_receivers()
             {
-                var mockLandingSurfaceSizeCommand = new Mock<ILandingSurfaceSizeCommand>();
-                mockLandingSurfaceSizeCommand.Setup(x => x.GetCommandType()).Returns(CommandType.LandingSurfaceSizeCommand);
+                var expectedRover = new Mock<IRover>();
+                var expectedLandingSurface = new Mock<ILandingSurface>();
+                
+                var mockRoverExploreCommand = new Mock<IRoverExploreCommand>();
+                mockRoverExploreCommand.Setup(x => x.GetCommandType()).Returns(CommandType.RoverExploreCommand);
 
                 var commandInvoker = new CommandInvoker(null);
-                commandInvoker.Assign(new[] { mockLandingSurfaceSizeCommand.Object, mockLandingSurfaceSizeCommand.Object, mockLandingSurfaceSizeCommand.Object });
+                commandInvoker.Assign(new[]{mockRoverExploreCommand.Object});
+                commandInvoker.SetLandingSurface(expectedLandingSurface.Object);
+                commandInvoker.SetRovers(new List<IRover>{ null, expectedRover.Object });
+
+                commandInvoker.InvokeAll();
+
+                mockRoverExploreCommand.Verify(
+                    x => x.SetReceivers(expectedRover.Object, expectedLandingSurface.Object), Times.Once());
+            }
+
+            [Test]
+            public void Invokes_Execute_for_each_command()
+            {
+                var mockCommand = new Mock<ILandingSurfaceSizeCommand>();
+                mockCommand.Setup(x => x.GetCommandType()).Returns(CommandType.LandingSurfaceSizeCommand);
+
+                var commandInvoker = new CommandInvoker(null);
+                commandInvoker.Assign(new[] {mockCommand.Object, mockCommand.Object, mockCommand.Object});
 
                 commandInvoker.InvokeAll();
                 
-                mockLandingSurfaceSizeCommand.Verify(x => x.Execute(), Times.Exactly(3));
+                mockCommand.Verify(x => x.Execute(), Times.Exactly(3));
             }
         }
     }

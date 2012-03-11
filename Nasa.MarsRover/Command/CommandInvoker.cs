@@ -21,7 +21,8 @@ namespace Nasa.MarsRover.Command
             setReceiversMethodDictionary = new Dictionary<CommandType, Action<ICommand>>
             {
                 {CommandType.LandingSurfaceSizeCommand, SetReceiversOnLandingSurfaceSizeCommand},
-                {CommandType.RoverDeployCommand, SetReceiversOnRoverDeployCommand}
+                {CommandType.RoverDeployCommand, SetReceiversOnRoverDeployCommand},
+                {CommandType.RoverExploreCommand, SetReceiversOnRoverExploreCommand}
             };
         }
 
@@ -67,6 +68,13 @@ namespace Nasa.MarsRover.Command
             var newRover = roverFactory();
             rovers.Add(newRover);
             roverDeployCommand.SetReceivers(newRover, landingSurface);
+        }
+
+        private void SetReceiversOnRoverExploreCommand(ICommand command)
+        {
+            var roverExploreCommand = (IRoverExploreCommand) command;
+            var latestRover = rovers[rovers.Count - 1];
+            roverExploreCommand.SetReceivers(latestRover, landingSurface);
         }
     }
 }
