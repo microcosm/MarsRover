@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Moq;
 using NUnit.Framework;
 using Nasa.MarsRover.Command;
 using Nasa.MarsRover.Command.Interpret;
 using Nasa.MarsRover.LandingSurface;
+using Nasa.MarsRover.Rovers;
 
 namespace Nasa.MarsRover.Tests.Command.Interpret
 {
@@ -13,41 +15,79 @@ namespace Nasa.MarsRover.Tests.Command.Interpret
         [TestFixture]
         public class CommandParser_Parse
         {
-            [Test]
-            public void When_Command_is_matched_as_LandingSurfaceSizeCommand_retrieves_relevant_command_object_from_factory()
+            [TestCase("2 4", 2, 4)]
+            [TestCase("3 1", 3, 1)]
+            public void When_Command_is_matched_as_LandingSurfaceSizeCommand_retrieves_command_object_from_factory_with_parsed_values(
+                string landingSurfaceSizeCommand, int expectedWidth, int expectedHeight)
             {
-                const string anyLandingsurfaceSizeCommand = "2 4";
-
-                var mockCommandMatcher = new Mock<ICommandMatcher>();
-                mockCommandMatcher.Setup(x => x.GetCommandType(anyLandingsurfaceSizeCommand))
-                    .Returns(CommandType.LandingSurfaceSizeCommand);
-
+                var expectedSize = new Size(expectedWidth, expectedHeight);
                 var expectedCommand = new Mock<ILandingSurfaceSizeCommand>();
-                Func<Size, ILandingSurfaceSizeCommand> landingSurfaceSizeCommandFactory = size => expectedCommand.Object;
-                
-                var commandParser = new CommandParser(mockCommandMatcher.Object, landingSurfaceSizeCommandFactory, null);
-                var actualCommands = commandParser.Parse(anyLandingsurfaceSizeCommand);
+                Func<Size, ILandingSurfaceSizeCommand> factory = size =>
+                {
+                    expectedCommand.Setup(x => x.Size).Returns(size);
+                    return expectedCommand.Object;
+                };
+                var mockCommandMatcher = createMockCommandMatcher(CommandType.LandingSurfaceSizeCommand);
 
-                Assert.AreEqual(expectedCommand.Object, actualCommands.First());
+                var commandParser = new CommandParser(mockCommandMatcher.Object, factory, null, null);
+                var actualCommand = (ILandingSurfaceSizeCommand) commandParser.Parse(landingSurfaceSizeCommand).First();
+
+                Assert.AreEqual(expectedCommand.Object, actualCommand);
+                Assert.AreEqual(expectedSize, actualCommand.Size);
             }
 
-            [Test]
-            public void When_Command_is_matched_as_RoverDeployCommand_retrieves_relevant_command_object_from_factory()
+            [TestCase("1 3 N", 1, 3, CardinalDirection.North)]
+            [TestCase("4 6 W", 4, 6, CardinalDirection.West)]
+            public void When_Command_is_matched_as_RoverDeployCommand_retrieves_command_object_from_factory_with_parsed_values(
+                string roverDeployCommand, int expectedX, int expectedY, CardinalDirection expectedCardinalDirection)
             {
-                const string anyRoverDeployCommand = "1 3 N";
-
-                var mockCommandMatcher = new Mock<ICommandMatcher>();
-                mockCommandMatcher.Setup(x => x.GetCommandType(anyRoverDeployCommand))
-                    .Returns(CommandType.RoverDeployCommand);
-
+                var expectedPoint = new Point(expectedX, expectedY);
                 var expectedCommand = new Mock<IRoverDeployCommand>();
-                Func<Point, CardinalDirection, IRoverDeployCommand> roverDeployCommandFactory = 
-                    (point, direction) => expectedCommand.Object;
+                Func<Point, CardinalDirection, IRoverDeployCommand> factory = (point, direction) =>
+                {
+                    expectedCommand.Setup(x => x.DeployPoint).Returns(point);
+                    expectedCommand.Setup(x => x.DeployDirection).Returns(direction);
+                    return expectedCommand.Object;
+                };
+                var mockCommandMatcher = createMockCommandMatcher(CommandType.RoverDeployCommand);
 
-                var commandParser = new CommandParser(mockCommandMatcher.Object, null, roverDeployCommandFactory);
-                var actualCommands = commandParser.Parse(anyRoverDeployCommand);
+                var commandParser = new CommandParser(mockCommandMatcher.Object, null, factory, null);
+                var actualCommand = (IRoverDeployCommand) commandParser.Parse(roverDeployCommand).First();
 
-                Assert.AreEqual(expectedCommand.Object, actualCommands.First());
+                Assert.AreEqual(expectedCommand.Object, actualCommand);
+                Assert.AreEqual(expectedPoint, actualCommand.DeployPoint);
+                Assert.AreEqual(expectedCardinalDirection, actualCommand.DeployDirection);
+            }
+
+            [TestCase("LMR", Movement.Left, Movement.Forward, Movement.Right)]
+            [TestCase("MRL", Movement.Forward, Movement.Right, Movement.Left)]
+            public void When_Command_is_matched_as_RoverExploreCommand_retrieves_command_object_from_factory_with_parsed_values(
+                string roverExploreCommand, Movement expectedFirstMovement, Movement expectedSecondMovement, 
+                Movement expectedThirdMovement)
+            {
+                var expectedCommand = new Mock<IRoverExploreCommand>();
+                Func<IList<Movement>, IRoverExploreCommand> factory = movements =>
+                {
+                    expectedCommand.Setup(x => x.Movements).Returns(movements);
+                    return expectedCommand.Object;
+                };
+                var mockCommandMatcher = createMockCommandMatcher(CommandType.RoverExploreCommand);
+
+                var commandParser = new CommandParser(mockCommandMatcher.Object, null, null, factory);
+                var actualCommand = (IRoverExploreCommand) commandParser.Parse(roverExploreCommand).First();
+
+                Assert.AreEqual(expectedCommand.Object, actualCommand);
+                Assert.AreEqual(expectedFirstMovement, actualCommand.Movements[0]);
+                Assert.AreEqual(expectedSecondMovement, actualCommand.Movements[1]);
+                Assert.AreEqual(expectedThirdMovement, actualCommand.Movements[2]);
+            }
+
+            private static Mock<ICommandMatcher> createMockCommandMatcher(CommandType commandType)
+            {
+                var mockCommandMatcher = new Mock<ICommandMatcher>();
+                mockCommandMatcher.Setup(x => x.GetCommandType(It.IsAny<string>()))
+                    .Returns(commandType);
+                return mockCommandMatcher;
             }
         }
     }

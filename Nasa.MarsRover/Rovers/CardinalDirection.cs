@@ -1,4 +1,4 @@
-﻿namespace Nasa.MarsRover.LandingSurface
+namespace Nasa.MarsRover.Rovers
 {
     public enum CardinalDirection
     {

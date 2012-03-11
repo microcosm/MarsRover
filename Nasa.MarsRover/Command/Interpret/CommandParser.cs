@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Nasa.MarsRover.LandingSurface;
+using Nasa.MarsRover.Rovers;
 
 namespace Nasa.MarsRover.Command.Interpret
 {
@@ -9,22 +10,28 @@ namespace Nasa.MarsRover.Command.Interpret
     {
         private readonly Func<Size, ILandingSurfaceSizeCommand> landingSurfaceSizeCommandFactory;
         private readonly Func<Point, CardinalDirection, IRoverDeployCommand> roverDeployCommandFactory;
+        private readonly Func<IList<Movement>, IRoverExploreCommand> roverExploreCommandFactory;
+
         private readonly ICommandMatcher commandMatcher;
         private readonly IDictionary<CommandType, Func<string, ICommand>> commandParserDictionary;
         private readonly IDictionary<char, CardinalDirection> cardinalDirectionDictionary;
+        private readonly IDictionary<char, Movement> movementDictionary;
 
         public CommandParser(ICommandMatcher aCommandMatcher, 
-            Func<Size, ILandingSurfaceSizeCommand> aLandingSurfaceSizeCommandFactory,
-            Func<Point, CardinalDirection, IRoverDeployCommand> aRoverDeployCommandFactory)
+            Func<Size, ILandingSurfaceSizeCommand> aLandingSurfaceSizeCommandFactory, 
+            Func<Point, CardinalDirection, IRoverDeployCommand> aRoverDeployCommandFactory, 
+            Func<IList<Movement>, IRoverExploreCommand> aRoverExploreCommandFactory)
         {
             commandMatcher = aCommandMatcher;
             landingSurfaceSizeCommandFactory = aLandingSurfaceSizeCommandFactory;
             roverDeployCommandFactory = aRoverDeployCommandFactory;
+            roverExploreCommandFactory = aRoverExploreCommandFactory;
 
             commandParserDictionary = new Dictionary<CommandType, Func<string, ICommand>>
             {
                  {CommandType.LandingSurfaceSizeCommand, ParseLandingSurfaceSizeCommand},
-                 {CommandType.RoverDeployCommand, ParseRoverDeployCommand}
+                 {CommandType.RoverDeployCommand, ParseRoverDeployCommand},
+                 {CommandType.RoverExploreCommand, ParseRoverExploreCommand}
             };
 
             cardinalDirectionDictionary = new Dictionary<char, CardinalDirection>
@@ -33,6 +40,13 @@ namespace Nasa.MarsRover.Command.Interpret
                  {'S', CardinalDirection.South},
                  {'E', CardinalDirection.East},
                  {'W', CardinalDirection.West}
+            };
+
+            movementDictionary = new Dictionary<char, Movement>
+            {
+                 {'L', Movement.Left},
+                 {'R', Movement.Right},
+                 {'M', Movement.Forward}
             };
         }
 
@@ -68,6 +82,14 @@ namespace Nasa.MarsRover.Command.Interpret
             var deployPoint = new Point(deployX, deployY);
 
             var populatedCommand = roverDeployCommandFactory(deployPoint, deployDirection);
+            return populatedCommand;
+        }
+
+        private ICommand ParseRoverExploreCommand(string toParse)
+        {
+            var arguments = toParse.ToCharArray();
+            var movements = arguments.Select(argument => movementDictionary[argument]).ToList();
+            var populatedCommand = roverExploreCommandFactory(movements);
             return populatedCommand;
         }
     }

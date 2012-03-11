@@ -56,14 +56,16 @@
     <Compile Include="CommandCenter.cs" />
     <Compile Include="Command\CommandInvoker.cs" />
     <Compile Include="Command\ICommandInvoker.cs" />
+    <Compile Include="Command\IRoverExploreCommand.cs" />
+    <Compile Include="Command\RoverExploreCommand.cs" />
     <Compile Include="ICommandCenter.cs" />
     <Compile Include="Report\IReportComposer.cs" />
     <Compile Include="Report\ConsoleReportComposer.cs" />
     <Compile Include="Report\ReportException.cs" />
     <Compile Include="Command\IRoverDeployCommand.cs" />
     <Compile Include="Command\RoverDeployCommand.cs" />
+    <Compile Include="Rovers\CardinalDirection.cs" />
     <Compile Include="Rovers\IRover.cs" />
-    <Compile Include="LandingSurface\CardinalDirection.cs" />
     <Compile Include="Command\CommandType.cs" />
     <Compile Include="Command\Interpret\CommandMatcher.cs" />
     <Compile Include="Command\Interpret\ICommandMatcher.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="LandingSurface\ILandingSurface.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rovers\Movement.cs" />
     <Compile Include="Rovers\Rover.cs" />
     <Compile Include="Rovers\RoverDeployException.cs" />
   </ItemGroup>
