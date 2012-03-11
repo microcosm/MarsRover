@@ -55,6 +55,27 @@ namespace Nasa.MarsRover.AcceptanceTests
             Assert.AreEqual(roverDeployCommand, roverReports[0]);
         }
 
+        [TestCase("MRM", "2 2 E")]
+        [TestCase("MMRMLM", "4 2 N")]
+        [TestCase("RM", "1 2 E")]
+        [TestCase("RR", "1 1 S")]
+        [TestCase("LLL", "1 1 E")]
+        public void Given_a_commandString_with_one_RoverExploreCommand_rovers_move_and_turn_before_reporting(string roverExploreCommand, string expectedReport)
+        {
+            var commandString = prependSizeAndDeployCommands();
+            var commandCenter = container.Resolve<ICommandCenter>();
+            commandCenter.Execute(commandString);
+            var roverReports = commandCenter.GetCombinedRoverReport().Split('\n');
+            Assert.AreEqual(1, roverReports.Length);
+            Assert.AreEqual(expectedReport, roverReports[0]);
+        }
+
+        private static string prependSizeAndDeployCommands()
+        {
+            const string roverDeployCommand = "1 1 N";
+            return prependLandingSurfaceSizeCommand(roverDeployCommand);
+        }
+
         private static string prependLandingSurfaceSizeCommand(string roverDeployCommand)
         {
             const string landingSurfaceSizeCommand = "9 9";
