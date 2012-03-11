@@ -9,6 +9,20 @@ namespace Nasa.MarsRover.Tests.Command
     public class RoverExploreCommandTests
     {
         [TestFixture]
+        public class RoverDeployCommand_Constructor
+        {
+            [Test]
+            public void Given_list_of_movements_exposes_as_public_property()
+            {
+                var expectedMovements = new List<Movement> {Movement.Left, Movement.Right};
+
+                var roverExploreCommand = new RoverExploreCommand(expectedMovements);
+
+                Assert.AreEqual(expectedMovements, roverExploreCommand.Movements);
+            }
+        }
+
+        [TestFixture]
         public class RoverExploreCommand_SetReceiver
         {
             [Test]
