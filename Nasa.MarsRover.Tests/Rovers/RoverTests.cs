@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using System.Collections.Generic;
+using Moq;
 using NUnit.Framework;
 using Nasa.MarsRover.LandingSurface;
 using Nasa.MarsRover.Rovers;
@@ -64,6 +65,35 @@ namespace Nasa.MarsRover.Tests.Rovers
                 
                 Assert.Throws<RoverDeployException>(() => 
                     rover.Deploy(mockLandingSurface.Object, aPoint, CardinalDirection.West));
+            }
+        }
+
+        [TestFixture]
+        public class Rover_Move
+        {
+            [TestCase(1, 1, CardinalDirection.South, Movement.Right, Movement.Right, Movement.Forward, 1, 2, CardinalDirection.North)]
+            [TestCase(2, 4, CardinalDirection.East, Movement.Forward, Movement.Forward, Movement.Forward, 5, 4, CardinalDirection.East)]
+            [TestCase(2, 2, CardinalDirection.West, Movement.Left, Movement.Forward, Movement.Forward, 2, 0, CardinalDirection.South)]
+            [TestCase(4, 5, CardinalDirection.North, Movement.Left, Movement.Left, Movement.Left, 4, 5, CardinalDirection.East)]
+            [TestCase(0, 0, CardinalDirection.South, Movement.Left, Movement.Forward, Movement.Forward, 2, 0, CardinalDirection.East)]
+            public void Should_alter_position_and_direction_in_response_to_movement_list(int startX, int startY, 
+                CardinalDirection startDirection, Movement firstMove, Movement secondMove, Movement thirdMove, 
+                int expectedX, int expectedY, CardinalDirection expectedDirection)
+            {
+                var startPosition = new Point(startX, startY);
+                var expectedPosition = new Point(expectedX, expectedY);
+                var movements = new List<Movement> {firstMove, secondMove, thirdMove};
+
+                var mockLandingSurface = new Mock<ILandingSurface>();
+                mockLandingSurface.Setup(x => x.IsValid(startPosition)).Returns(true);
+
+                var rover = new Rover();
+                rover.Deploy(mockLandingSurface.Object, startPosition, startDirection);
+                rover.Move(movements);
+
+                Assert.AreEqual(expectedPosition.X, rover.Position.X);
+                Assert.AreEqual(expectedPosition.Y, rover.Position.Y);
+                Assert.AreEqual(expectedDirection, rover.CardinalDirection);
             }
         }
 
