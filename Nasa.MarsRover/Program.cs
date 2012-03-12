@@ -49,9 +49,9 @@ namespace Nasa.MarsRover
             var commandStringBuilder = new StringBuilder();
             commandStringBuilder.AppendLine("5 5");
             commandStringBuilder.AppendLine("1 2 N");
-            //commandStringBuilder.AppendLine("LMLMLMLMM");
-            commandStringBuilder.Append("3 3 E");
-            //commandStringBuilder.AppendLine("MMRMMRMRRM");
+            commandStringBuilder.AppendLine("LMLMLMLMM");
+            commandStringBuilder.AppendLine("3 3 E");
+            commandStringBuilder.Append("MMRMMRMRRM");
             return commandStringBuilder.ToString();
         }
     }

@@ -31,7 +31,8 @@ namespace Nasa.MarsRover.AcceptanceTests
 
         [TestCase("5 5", 5, 5)]
         [TestCase("2 3", 2, 3)]
-        public void Given_a_commandString_with_one_LandingSurfaceSizeCommand_creates_LandingSurface_and_sets_size(string landingSurfaceSizeCommandString, int expectedWidth, int expectedHeight)
+        public void Given_a_commandString_with_one_LandingSurfaceSizeCommand_creates_LandingSurface_and_sets_size(
+            string landingSurfaceSizeCommandString, int expectedWidth, int expectedHeight)
         {
             var expectedSize = new Size(expectedWidth, expectedHeight);
             var commandCenter = container.Resolve<ICommandCenter>();
@@ -45,7 +46,8 @@ namespace Nasa.MarsRover.AcceptanceTests
         [TestCase("3 4 S")]
         [TestCase("5 6 E")]
         [TestCase("1 2 W")]
-        public void Given_a_commandString_with_one_RoverDeployCommand_rovers_deploy_and_report_without_moving(string roverDeployCommand)
+        public void Given_a_commandString_with_one_RoverDeployCommand_rovers_deploy_and_report_without_moving(
+            string roverDeployCommand)
         {
             var commandString = prependLandingSurfaceSizeCommand(roverDeployCommand);
             var commandCenter = container.Resolve<ICommandCenter>();
@@ -56,13 +58,14 @@ namespace Nasa.MarsRover.AcceptanceTests
         }
 
         [TestCase("MRM", "2 2 E")]
-        [TestCase("MMRMLM", "4 2 N")]
-        [TestCase("RM", "1 2 E")]
+        [TestCase("MMRMLM", "2 4 N")]
+        [TestCase("RM", "2 1 E")]
         [TestCase("RR", "1 1 S")]
         [TestCase("LLL", "1 1 E")]
-        public void Given_a_commandString_with_one_RoverExploreCommand_rovers_move_and_turn_before_reporting(string roverExploreCommand, string expectedReport)
+        public void Given_a_commandString_with_one_RoverExploreCommand_rovers_move_and_turn_before_reporting(
+            string roverExploreCommand, string expectedReport)
         {
-            var commandString = prependSizeAndDeployCommands();
+            var commandString = prependSizeAndDeployCommands(roverExploreCommand);
             var commandCenter = container.Resolve<ICommandCenter>();
             commandCenter.Execute(commandString);
             var roverReports = commandCenter.GetCombinedRoverReport().Split('\n');
@@ -70,10 +73,32 @@ namespace Nasa.MarsRover.AcceptanceTests
             Assert.AreEqual(expectedReport, roverReports[0]);
         }
 
-        private static string prependSizeAndDeployCommands()
+        [Test]
+        public void Given_input_string_defined_in_problem_statement_produces_output_string_defined_in_problem_statement()
+        {
+            const string inputStringAsDefinedInProblemStatement = @"5 5
+1 2 N
+LMLMLMLMM
+3 3 E
+MMRMMRMRRM";
+
+            const string outputStringAsDefinedInProblemStatement = @"1 3 N
+5 1 E";
+
+            var commandCenter = container.Resolve<ICommandCenter>();
+            commandCenter.Execute(inputStringAsDefinedInProblemStatement);
+            var actualOutputString = commandCenter.GetCombinedRoverReport();
+            Assert.AreEqual(outputStringAsDefinedInProblemStatement, actualOutputString);
+        }
+
+        private static string prependSizeAndDeployCommands(string roverExploreCommand)
         {
             const string roverDeployCommand = "1 1 N";
-            return prependLandingSurfaceSizeCommand(roverDeployCommand);
+            var sizeAndDeployCommands = prependLandingSurfaceSizeCommand(roverDeployCommand);
+            var commandString = new StringBuilder();
+            commandString.AppendLine(sizeAndDeployCommands);
+            commandString.Append(roverExploreCommand);
+            return commandString.ToString();
         }
 
         private static string prependLandingSurfaceSizeCommand(string roverDeployCommand)
