@@ -28,7 +28,7 @@ namespace Nasa.MarsRover.Tests.Command
         public class RoverDeployCommand_SetReceivers
         {
             [Test]
-            public void Should_accept_Receiver_arguments()
+            public void Accepts_Receiver_arguments()
             {
                 const CardinalDirection anyCardinalDirection = CardinalDirection.South;
                 var anyPoint = new Point(0, 0);
@@ -44,7 +44,7 @@ namespace Nasa.MarsRover.Tests.Command
         public class RoverDeployCommand_Execute
         {
             [Test]
-            public void Should_invoke_Rover_Deploy()
+            public void Invokes_Rover_Deploy()
             {
                 const CardinalDirection expectedCardinalDirection = CardinalDirection.North;
                 var expectedPoint = new Point(0, 0);
@@ -65,7 +65,7 @@ namespace Nasa.MarsRover.Tests.Command
         public class RoverDeployCommand_GetCommandType
         {
             [Test]
-            public void Should_return_RoverDeployCommand_type()
+            public void Returns_RoverDeployCommand_type()
             {
                 var point = new Point(0, 0);
                 var roverDeployCommand = new RoverDeployCommand(point, CardinalDirection.West);

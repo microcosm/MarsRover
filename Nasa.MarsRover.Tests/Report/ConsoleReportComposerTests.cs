@@ -16,7 +16,7 @@ namespace Nasa.MarsRover.Tests.Report
             [TestCase(3, 4, CardinalDirection.East, "3 4 E")]
             [TestCase(5, 6, CardinalDirection.South, "5 6 S")]
             [TestCase(7, 8, CardinalDirection.West, "7 8 W")]
-            public void Should_compose_arguments_into_expected_report_format(int coordinateX, int coordinateY, CardinalDirection cardinalDirection, string expectedReport)
+            public void Composes_arguments_into_expected_report_format(int coordinateX, int coordinateY, CardinalDirection cardinalDirection, string expectedReport)
             {
                 var point = new Point(coordinateX, coordinateY);
 
@@ -30,7 +30,7 @@ namespace Nasa.MarsRover.Tests.Report
         public class ConsoleReportComposer_CompileReports
         {
             [Test]
-            public void When_any_Rover_not_deployed_should_throw_ReportException()
+            public void When_any_Rover_not_deployed_throws_ReportException()
             {
                 var mockRover = new Mock<IRover>();
                 mockRover.Setup(x => x.IsDeployed()).Returns(false);
@@ -42,7 +42,7 @@ namespace Nasa.MarsRover.Tests.Report
             }
 
             [Test]
-            public void When_all_Rovers_deployed_should_request_Rover_Positions_and_CardinalDirections()
+            public void When_all_Rovers_deployed_requests_Rover_Positions_and_CardinalDirections()
             {
                 var mockRover = new Mock<IRover>();
                 mockRover.Setup(x => x.IsDeployed()).Returns(true);

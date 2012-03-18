@@ -17,7 +17,7 @@ namespace Nasa.MarsRover.Tests.Command.Interpret
         {
             [TestCase("2 4", 2, 4)]
             [TestCase("3 1", 3, 1)]
-            public void When_Command_is_matched_as_LandingSurfaceSizeCommand_retrieves_command_object_from_factory_with_parsed_values(
+            public void When_LandingSurfaceSizeCommand_type_returns_new_object_from_factory_with_parsed_values(
                 string landingSurfaceSizeCommand, int expectedWidth, int expectedHeight)
             {
                 var expectedSize = new Size(expectedWidth, expectedHeight);
@@ -38,7 +38,7 @@ namespace Nasa.MarsRover.Tests.Command.Interpret
 
             [TestCase("1 3 N", 1, 3, CardinalDirection.North)]
             [TestCase("4 6 W", 4, 6, CardinalDirection.West)]
-            public void When_Command_is_matched_as_RoverDeployCommand_retrieves_command_object_from_factory_with_parsed_values(
+            public void When_RoverDeployCommand_type_returns_new_command_from_factory_with_parsed_values(
                 string roverDeployCommand, int expectedX, int expectedY, CardinalDirection expectedCardinalDirection)
             {
                 var expectedPoint = new Point(expectedX, expectedY);
@@ -61,7 +61,7 @@ namespace Nasa.MarsRover.Tests.Command.Interpret
 
             [TestCase("LMR", Movement.Left, Movement.Forward, Movement.Right)]
             [TestCase("MRL", Movement.Forward, Movement.Right, Movement.Left)]
-            public void When_Command_is_matched_as_RoverExploreCommand_retrieves_command_object_from_factory_with_parsed_values(
+            public void When_RoverExploreCommand_type_returns_new_command_from_factory_with_parsed_values(
                 string roverExploreCommand, Movement expectedFirstMovement, Movement expectedSecondMovement, 
                 Movement expectedThirdMovement)
             {

@@ -23,7 +23,7 @@ namespace Nasa.MarsRover.Tests.Command
         public class LandingSurfaceSizeCommand_SetReceiver
         {
             [Test]
-            public void Should_accept_Receiver_argument()
+            public void Accepts_Receiver_argument()
             {
                 var anySize = new Size(0, 0);
                 var mockLandingSurface = new Mock<ILandingSurface>();
@@ -37,7 +37,7 @@ namespace Nasa.MarsRover.Tests.Command
         public class LandingSurfaceSizeCommand_Execute
         {
             [Test]
-            public void Should_set_LandingSurface_size()
+            public void Sets_LandingSurface_size()
             {
                 var mockLandingSurface = new Mock<ILandingSurface>();
                 var anySize = new Size(0, 0);
@@ -54,7 +54,7 @@ namespace Nasa.MarsRover.Tests.Command
         public class LandingSurfaceSizeCommand_GetCommandType
         {
             [Test]
-            public void Should_return_LandingSurfaceSizeCommand_type()
+            public void Returns_LandingSurfaceSizeCommand_type()
             {
                 var size = new Size(0, 0);
                 var landingSurfaceSizeCommand = new LandingSurfaceSizeCommand(size);

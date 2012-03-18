@@ -26,7 +26,7 @@ namespace Nasa.MarsRover.Tests.Command
         public class RoverExploreCommand_SetReceiver
         {
             [Test]
-            public void Should_accept_Receiver_argument()
+            public void Accepts_Receiver_argument()
             {
                 var mockRover = new Mock<IRover>();
                 var landingSurfaceSizeCommand = new RoverExploreCommand(null);
@@ -39,7 +39,7 @@ namespace Nasa.MarsRover.Tests.Command
         public class RoverExploreCommand_Execute
         {
             [Test]
-            public void Should_invoke_Rover_Move()
+            public void Invokes_Rover_Move()
             {
                 var expectedMovements = new List<Movement> {Movement.Left, Movement.Right};
                 var mockRover = new Mock<IRover>();
@@ -57,7 +57,7 @@ namespace Nasa.MarsRover.Tests.Command
         public class RoverExploreCommand_GetCommandType
         {
             [Test]
-            public void Should_return_RoverExploreCommand_type()
+            public void Returns_RoverExploreCommand_type()
             {
                 var roverExploreCommand = new RoverExploreCommand(null);
                 Assert.AreEqual(roverExploreCommand.GetCommandType(), CommandType.RoverExploreCommand);
