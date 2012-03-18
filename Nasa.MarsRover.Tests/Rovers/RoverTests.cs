@@ -11,7 +11,7 @@ namespace Nasa.MarsRover.Tests.Rovers
         public class Rover_Constructor
         {
             [Test]
-            public void Should_initialize_with_IsDeployed_equal_to_false()
+            public void Initializes_with_IsDeployed_equal_to_false()
             {
                 var rover = new Rover();
                 Assert.That(!rover.IsDeployed());
@@ -31,7 +31,7 @@ namespace Nasa.MarsRover.Tests.Rovers
 
             [TestCase(1, 2, CardinalDirection.East)]
             [TestCase(3, 4, CardinalDirection.South)]
-            public void When_given_valid_deploy_point_and_direction_should_expose_as_properties(int expectedX, int expectedY, CardinalDirection expectedCardinalDirection)
+            public void Given_valid_deploy_point_and_direction_exposes_as_properties(int expectedX, int expectedY, CardinalDirection expectedCardinalDirection)
             {
                 var expectedPoint = new Point(expectedX, expectedY);
                 mockLandingSurface.Setup(x => x.IsValid(expectedPoint)).Returns(true);
@@ -44,7 +44,7 @@ namespace Nasa.MarsRover.Tests.Rovers
             }
 
             [Test]
-            public void Should_invoke_LandingSurface_IsValid()
+            public void Asks_if_deploy_point_is_valid_for_landing_surface()
             {
                 var aPoint = new Point(0, 0);
                 mockLandingSurface.Setup(x => x.IsValid(aPoint)).Returns(true);
@@ -54,7 +54,7 @@ namespace Nasa.MarsRover.Tests.Rovers
             }
 
             [Test]
-            public void When_given_invalid_deploy_point_should_throw_RoverDeployException()
+            public void Given_invalid_deploy_point_throws_RoverDeployException()
             {
                 var aPoint = new Point(0, 0);
                 var aSize = new Size(0, 0);
@@ -76,7 +76,7 @@ namespace Nasa.MarsRover.Tests.Rovers
             [TestCase(2, 2, CardinalDirection.West, Movement.Left, Movement.Forward, Movement.Forward, 2, 0, CardinalDirection.South)]
             [TestCase(4, 5, CardinalDirection.North, Movement.Left, Movement.Left, Movement.Left, 4, 5, CardinalDirection.East)]
             [TestCase(0, 0, CardinalDirection.South, Movement.Left, Movement.Forward, Movement.Forward, 2, 0, CardinalDirection.East)]
-            public void Should_alter_position_and_direction_in_response_to_movement_list(int startX, int startY, 
+            public void Alters_position_and_direction_in_response_to_movement_list(int startX, int startY, 
                 CardinalDirection startDirection, Movement firstMove, Movement secondMove, Movement thirdMove, 
                 int expectedX, int expectedY, CardinalDirection expectedDirection)
             {

@@ -37,12 +37,12 @@ namespace Nasa.MarsRover.Tests
         }
 
         [TestFixture]
-        public class CommandCenter_Interpret
+        public class CommandCenter_Execute
         {
             [Test]
-            public void Assigns_command_list_from_CommandParser_to_CommandInvoker_and_Invokes()
+            public void Parses_command_string_and_invokes_all_commands()
             {
-                var expectedInvocationList = new ICommand[] { new LandingSurfaceSizeCommand(new Size(1, 2)) };
+                var expectedInvocationList = new ICommand[]{};
                 var mockCommandParser = new Mock<ICommandParser>();
                 mockCommandParser.Setup(x => x.Parse(null)).Returns(expectedInvocationList);
 
