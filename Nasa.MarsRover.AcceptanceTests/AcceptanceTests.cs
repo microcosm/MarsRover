@@ -76,15 +76,8 @@ namespace Nasa.MarsRover.AcceptanceTests
         [Test]
         public void Given_input_string_defined_in_problem_statement_produces_output_string_defined_in_problem_statement()
         {
-            const string inputStringAsDefinedInProblemStatement = @"5 5
-1 2 N
-LMLMLMLMM
-3 3 E
-MMRMMRMRRM";
-
-            const string outputStringAsDefinedInProblemStatement = @"1 3 N
-5 1 E";
-
+            var inputStringAsDefinedInProblemStatement = getInputCommandString();
+            var outputStringAsDefinedInProblemStatement = getExpectedReportString();
             var commandCenter = container.Resolve<ICommandCenter>();
             commandCenter.Execute(inputStringAsDefinedInProblemStatement);
             var actualOutputString = commandCenter.GetCombinedRoverReport();
@@ -108,6 +101,25 @@ MMRMMRMRRM";
             commandString.AppendLine(landingSurfaceSizeCommand);
             commandString.Append(roverDeployCommand);
             return commandString.ToString();
+        }
+
+        private static string getInputCommandString()
+        {
+            var commandStringBuilder = new StringBuilder();
+            commandStringBuilder.AppendLine("5 5");
+            commandStringBuilder.AppendLine("1 2 N");
+            commandStringBuilder.AppendLine("LMLMLMLMM");
+            commandStringBuilder.AppendLine("3 3 E");
+            commandStringBuilder.Append("MMRMMRMRRM");
+            return commandStringBuilder.ToString();
+        }
+
+        private static string getExpectedReportString()
+        {
+            var commandStringBuilder = new StringBuilder();
+            commandStringBuilder.AppendLine("1 3 N");
+            commandStringBuilder.Append("5 1 E");
+            return commandStringBuilder.ToString();
         }
     }
 }
